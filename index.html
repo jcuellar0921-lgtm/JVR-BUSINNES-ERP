@@ -8,37 +8,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --sb:#1a1f2e;--sbh:#252d40;--sba:#3b5bdb;--sbt:#8892b0;
-  --hd:#fff;--bg:#f0f2f5;--card:#fff;--tx:#1a1f2e;--tx2:#6b7280;--bd:#e5e7eb;
-  --blue:#3b5bdb;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--teal:#14b8a6;
-  --r:10px;
-}
-body.dark{
-  --hd:#1e2435;--bg:#141824;--card:#1e2435;--tx:#e2e8f0;--tx2:#94a3b8;--bd:#2d3748;
-}
+:root{--sb:#1a1f2e;--sbh:#252d40;--sba:#3b5bdb;--sbt:#8892b0;--hd:#fff;--bg:#f0f2f5;--card:#fff;--tx:#1a1f2e;--tx2:#6b7280;--bd:#e5e7eb;--blue:#3b5bdb;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--teal:#14b8a6;--r:10px}
+body.dark{--hd:#1e2435;--bg:#141824;--card:#1e2435;--tx:#e2e8f0;--tx2:#94a3b8;--bd:#2d3748}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--tx);display:flex;height:100vh;overflow:hidden;font-size:14px;transition:background .2s,color .2s}
 .sidebar{width:220px;min-width:220px;background:var(--sb);display:flex;flex-direction:column;overflow-y:auto}
 .sb-logo{padding:14px 12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.07);cursor:pointer;position:relative;min-height:62px}
 .sb-logo:hover .logo-overlay{opacity:1}
-.logo-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;border-radius:0;opacity:0;transition:.2s;pointer-events:none;border-bottom:1px solid rgba(255,255,255,.07)}
+.logo-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;opacity:0;transition:.2s;pointer-events:none}
 .logo-overlay span{color:#fff;font-size:11px;font-weight:600;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
-.sb-logo-icon{width:34px;height:34px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0;overflow:hidden}
-.sb-logo-icon img{width:100%;height:100%;object-fit:contain;border-radius:8px}
+.sb-logo-icon{width:36px;height:36px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0;overflow:hidden}
+.sb-logo-icon img{width:100%;height:100%;object-fit:contain}
 .sb-logo-text{font-size:15px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sb-logo-sub{font-size:10px;color:var(--sbt);margin-top:1px}
-#logo-input{display:none}
 .sb-sec{padding:16px 10px 4px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.25);font-weight:600}
 .ni{display:flex;align-items:center;gap:10px;padding:9px 12px;margin:1px 6px;border-radius:7px;cursor:pointer;color:var(--sbt);transition:.15s}
 .ni:hover{background:var(--sbh);color:#c8d0e7}
 .ni.active{background:var(--sba);color:#fff}
-.ni i{font-size:17px;min-width:17px}
-.ni span{font-size:13px}
+.ni i{font-size:17px;min-width:17px}.ni span{font-size:13px}
 .nb{background:var(--red);color:#fff;font-size:10px;padding:1px 6px;border-radius:10px;margin-left:auto;font-weight:600}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.topbar{background:var(--hd);border-bottom:1px solid var(--bd);padding:0 20px;height:56px;display:flex;align-items:center;gap:12px;flex-shrink:0;transition:background .2s}
+.topbar{background:var(--hd);border-bottom:1px solid var(--bd);padding:0 20px;height:56px;display:flex;align-items:center;gap:12px;flex-shrink:0}
 .pt{font-size:16px;font-weight:600;flex:1;color:var(--tx)}
-.tsearch{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:7px 12px;display:flex;align-items:center;gap:8px;width:220px;transition:background .2s}
+.tsearch{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:7px 12px;display:flex;align-items:center;gap:8px;width:220px}
 .tsearch input{background:none;border:none;outline:none;font-size:13px;color:var(--tx);width:100%}
 .tbtn{width:36px;height:36px;border-radius:8px;border:1px solid var(--bd);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--tx2);font-size:16px;position:relative;transition:.15s}
 .tbtn:hover{background:var(--bg)}
@@ -49,14 +40,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .stitle{font-size:18px;font-weight:700;margin-bottom:4px;color:var(--tx)}
 .ssub{font-size:13px;color:var(--tx2);margin-bottom:18px}
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
-.kpi{background:var(--card);border-radius:var(--r);padding:16px;border:1px solid var(--bd);transition:background .2s}
+.kpi{background:var(--card);border-radius:var(--r);padding:16px;border:1px solid var(--bd)}
 .kpi-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:10px}
 .kpi-label{font-size:12px;color:var(--tx2);margin-bottom:4px}
 .kpi-value{font-size:22px;font-weight:700;letter-spacing:-.5px;color:var(--tx)}
 .kpi-change{font-size:12px;margin-top:4px;display:flex;align-items:center;gap:3px}
 .up{color:var(--green)}.dn{color:var(--red)}
 .charts-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:20px}
-.card{background:var(--card);border-radius:var(--r);border:1px solid var(--bd);padding:16px;transition:background .2s}
+.card{background:var(--card);border-radius:var(--r);border:1px solid var(--bd);padding:16px}
 .card-title{font-size:14px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;color:var(--tx)}
 .cw{position:relative;height:200px}
 .tbl-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -68,16 +59,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .bg{background:#d1fae5;color:#065f46}.ba{background:#fef3c7;color:#92400e}
 .br{background:#fee2e2;color:#991b1b}.bb{background:#dbeafe;color:#1e40af}
 .bp{background:#f3e8ff;color:#6d28d9}.bt{background:#ccfbf1;color:#0f766e}
-body.dark .bg{background:#064e3b;color:#6ee7b7}
-body.dark .ba{background:#78350f;color:#fcd34d}
-body.dark .br{background:#7f1d1d;color:#fca5a5}
-body.dark .bb{background:#1e3a5f;color:#93c5fd}
-body.dark .bp{background:#4c1d95;color:#c4b5fd}
+body.dark .bg{background:#064e3b;color:#6ee7b7}body.dark .ba{background:#78350f;color:#fcd34d}
+body.dark .br{background:#7f1d1d;color:#fca5a5}body.dark .bb{background:#1e3a5f;color:#93c5fd}body.dark .bp{background:#4c1d95;color:#c4b5fd}
 .alerts{display:flex;flex-direction:column;gap:8px}
 .alert{padding:10px 12px;border-radius:8px;font-size:13px;display:flex;align-items:center;gap:10px;color:var(--tx)}
-.aw{background:#fffbeb;border-left:3px solid var(--amber)}
-.ar{background:#fff5f5;border-left:3px solid var(--red)}
-.ai{background:#eff6ff;border-left:3px solid var(--blue)}
+.aw{background:#fffbeb;border-left:3px solid var(--amber)}.ar{background:#fff5f5;border-left:3px solid var(--red)}.ai{background:#eff6ff;border-left:3px solid var(--blue)}
 body.dark .aw{background:#451a03}body.dark .ar{background:#450a0a}body.dark .ai{background:#0f1f3d}
 .toolbar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
 .btn{padding:8px 14px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:6px;transition:.15s}
@@ -91,8 +77,7 @@ body.dark .aw{background:#451a03}body.dark .ar{background:#450a0a}body.dark .ai{
 .dtbl{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--r);overflow:hidden;border:1px solid var(--bd)}
 .dtbl th{background:var(--bg);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--tx2);padding:10px 14px;text-align:left;border-bottom:1px solid var(--bd)}
 .dtbl td{padding:10px 14px;border-bottom:1px solid var(--bd);font-size:13px;color:var(--tx);vertical-align:middle}
-.dtbl tr:last-child td{border:none}
-.dtbl tr:hover td{background:var(--bg)}
+.dtbl tr:last-child td{border:none}.dtbl tr:hover td{background:var(--bg)}
 /* POS */
 .pos-layout{display:grid;grid-template-columns:1fr 360px;gap:14px;height:calc(100vh - 140px)}
 .pos-prods{background:var(--card);border-radius:var(--r);border:1px solid var(--bd);padding:14px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
@@ -111,13 +96,11 @@ body.dark .aw{background:#451a03}body.dark .ar{background:#450a0a}body.dark .ai{
 .pos-cart{background:var(--card);border-radius:var(--r);border:1px solid var(--bd);display:flex;flex-direction:column;overflow:hidden}
 .pos-cart-hdr{padding:12px 14px;border-bottom:1px solid var(--bd);font-weight:600;font-size:14px;display:flex;justify-content:space-between;align-items:center;background:var(--bg);color:var(--tx)}
 .pos-cart-items{flex:1;overflow-y:auto;padding:8px 14px;min-height:0}
-.ci{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--bd)}
-.ci:last-child{border:none}
+.ci{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--bd)}.ci:last-child{border:none}
 .cqty{display:flex;align-items:center;gap:5px}
 .qbtn{width:22px;height:22px;border-radius:5px;border:1px solid var(--bd);background:var(--card);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--tx)}
 .qbtn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
-.del-btn{width:22px;height:22px;border-radius:5px;border:none;background:none;cursor:pointer;color:var(--tx2)}
-.del-btn:hover{color:var(--red)}
+.del-btn{width:22px;height:22px;border-radius:5px;border:none;background:none;cursor:pointer;color:var(--tx2)}.del-btn:hover{color:var(--red)}
 .pos-cart-ftr{padding:12px 14px;border-top:1px solid var(--bd);background:var(--bg)}
 .trow{display:flex;justify-content:space-between;margin-bottom:5px;font-size:13px;color:var(--tx2)}
 .trow.grand{font-size:16px;font-weight:700;margin-top:8px;padding-top:8px;border-top:2px solid var(--bd);color:var(--tx)}
@@ -137,40 +120,35 @@ body.dark .aw{background:#451a03}body.dark .ar{background:#450a0a}body.dark .ai{
 /* CRM */
 .crm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
 .fs{background:var(--card);border-radius:var(--r);border:1px solid var(--bd);padding:14px;border-top:4px solid var(--blue)}
-.fs-label{font-size:12px;color:var(--tx2);margin-bottom:6px}
-.fs-count{font-size:24px;font-weight:700;color:var(--tx)}
-.fs-val{font-size:12px;color:var(--tx2);margin-top:2px}
+.fs-label{font-size:12px;color:var(--tx2);margin-bottom:6px}.fs-count{font-size:24px;font-weight:700;color:var(--tx)}.fs-val{font-size:12px;color:var(--tx2);margin-top:2px}
 .cc{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bd)}
 .cav2{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
-.ci2{flex:1}.cn{font-size:13px;font-weight:500;color:var(--tx)}.co{font-size:12px;color:var(--tx2)}
-.cv{text-align:right}.cam{font-size:13px;font-weight:600;color:var(--tx)}
+.ci2{flex:1}.cn{font-size:13px;font-weight:500;color:var(--tx)}.co{font-size:12px;color:var(--tx2)}.cv{text-align:right}.cam{font-size:13px;font-weight:600;color:var(--tx)}
 /* RRHH */
 .emp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
 .estat{background:var(--card);border-radius:var(--r);border:1px solid var(--bd);padding:14px;text-align:center}
-.estat-v{font-size:26px;font-weight:700;margin:8px 0 4px;color:var(--tx)}
-.estat-l{font-size:12px;color:var(--tx2)}
+.estat-v{font-size:26px;font-weight:700;margin:8px 0 4px;color:var(--tx)}.estat-l{font-size:12px;color:var(--tx2)}
 /* CONFIG */
 .rep-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .sc{background:var(--card);border-radius:var(--r);border:1px solid var(--bd);padding:16px}
 .sc h3{font-size:14px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--tx)}
-.srow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bd);font-size:13px;color:var(--tx)}
-.srow:last-child{border:none}
+.srow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bd);font-size:13px;color:var(--tx)}.srow:last-child{border:none}
+.srow-edit{cursor:pointer;color:var(--blue);font-size:12px}
 .tgl{width:40px;height:22px;border-radius:11px;position:relative;cursor:pointer;transition:.2s;flex-shrink:0}
 .tgl.on{background:var(--blue)}.tgl.off{background:#d1d5db}
 .tgl::after{content:'';position:absolute;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
 .tgl.on::after{left:21px}.tgl.off::after{left:3px}
 /* MODAL */
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.2s}
-.ov.show{opacity:1;pointer-events:all}
-.ov.show .modal{transform:scale(1)}
+.ov.show{opacity:1;pointer-events:all}.ov.show .modal{transform:scale(1)}
 .modal{background:var(--card);border-radius:12px;width:500px;max-width:96vw;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);transform:scale(.95);transition:.2s}
+.modal.wide{width:700px}
 .mhdr{padding:16px 20px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
 .mhdr h3{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--tx)}
 .mclose{width:28px;height:28px;border-radius:6px;border:none;background:var(--bg);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--tx2)}
 .mclose:hover{background:#fee2e2;color:var(--red)}
-.mbody{padding:20px}
-.mftr{padding:14px 20px;border-top:1px solid var(--bd);display:flex;gap:8px;justify-content:flex-end}
+.mbody{padding:20px}.mftr{padding:14px 20px;border-top:1px solid var(--bd);display:flex;gap:8px;justify-content:flex-end}
 .frow{margin-bottom:14px}
 .frow label{font-size:12px;color:var(--tx2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:5px}
 .finput{width:100%;padding:9px 12px;border:1.5px solid var(--bd);border-radius:8px;font-size:13px;outline:none;color:var(--tx);background:var(--card)}
@@ -178,32 +156,27 @@ body.dark .aw{background:#451a03}body.dark .ar{background:#450a0a}body.dark .ai{
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 select.finput{cursor:pointer}
 /* LOGO MODAL */
-.logo-upload-area{border:2px dashed var(--bd);border-radius:12px;padding:30px 20px;text-align:center;cursor:pointer;transition:.2s;background:var(--bg)}
+.logo-upload-area{border:2px dashed var(--bd);border-radius:12px;padding:28px 20px;text-align:center;cursor:pointer;transition:.2s;background:var(--bg)}
 .logo-upload-area:hover{border-color:var(--blue);background:rgba(59,91,219,.05)}
-.logo-preview-row{display:flex;gap:14px;align-items:center;margin-top:16px;flex-wrap:wrap}
-.logo-prev-item{text-align:center;font-size:11px;color:var(--tx2)}
-.logo-prev-box{width:52px;height:52px;border-radius:10px;background:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;overflow:hidden}
+.logo-preview-row{display:flex;gap:14px;align-items:center;margin-top:14px;flex-wrap:wrap;background:var(--bg);border-radius:8px;padding:12px}
+.logo-prev-box{width:52px;height:52px;border-radius:10px;background:var(--blue);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .logo-prev-box img{width:100%;height:100%;object-fit:contain}
-.logo-name-input{margin-top:14px}
 /* RECIBO */
 .recibo{padding:20px;font-family:'Courier New',monospace;font-size:12px;line-height:1.6;color:#1a1f2e}
 .recibo-logo{text-align:center;margin-bottom:10px}
 .recibo-logo strong{font-size:15px;display:block}
 .rsep{border:none;border-top:1px dashed #ccc;margin:10px 0}
 .recibo table{width:100%;border-collapse:collapse}
-.recibo table td{padding:2px 0;font-size:12px}
-.recibo table td:last-child{text-align:right}
+.recibo table td{padding:2px 0;font-size:12px}.recibo table td:last-child{text-align:right}
 .recibo-grand td{font-size:14px;font-weight:700;padding:4px 0;border-top:2px solid #333}
 .rvuelto{background:#d1fae5;border-radius:6px;padding:8px 10px;margin:8px 0;display:flex;justify-content:space-between;font-weight:700;font-size:13px}
 .rfooter{text-align:center;color:#6b7280;font-size:11px;margin-top:10px}
 .qr-area{border:3px dashed var(--blue);border-radius:12px;padding:40px 20px;text-align:center;background:rgba(59,91,219,.05);margin:16px 0;cursor:pointer;transition:.15s}
-.qr-area:hover{background:rgba(59,91,219,.1)}
-.qr-area i{font-size:48px;color:var(--blue);display:block;margin-bottom:10px}
+.qr-area:hover{background:rgba(59,91,219,.1)}.qr-area i{font-size:48px;color:var(--blue);display:block;margin-bottom:10px}
 .barcode-row{display:flex;gap:8px;margin-bottom:16px}
 .barcode-row input{flex:1;padding:10px 14px;border:2px solid var(--blue);border-radius:8px;font-size:15px;font-family:monospace;outline:none;background:var(--card);color:var(--tx)}
 .stock-bar{width:100%;height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin-top:4px}
 .stock-fill{height:100%;border-radius:3px}
-/* Dark icon overrides */
 body.dark .kpi-icon[style*="background:#eff2ff"]{background:#1e3a8a!important}
 body.dark .kpi-icon[style*="background:#d1fae5"]{background:#064e3b!important}
 body.dark .kpi-icon[style*="background:#fef3c7"]{background:#78350f!important}
@@ -212,7 +185,6 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
 </style>
 </head>
 <body>
-
 <nav class="sidebar">
   <div class="sb-logo" onclick="openModal('m-logo')" title="Cambiar logo / nombre">
     <div class="sb-logo-icon" id="sb-icon">
@@ -221,15 +193,16 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
     </div>
     <div>
       <div class="sb-logo-text" id="sb-name">NexoERP</div>
-      <div class="sb-logo-sub">v2.5 · SaaS</div>
+      <div class="sb-logo-sub" id="sb-sub">v2.5 · SaaS</div>
     </div>
     <div class="logo-overlay"><span><i class="ti ti-camera"></i> Cambiar logo</span></div>
   </div>
+  <input type="file" id="logo-input" accept="image/*" style="display:none" onchange="previewLogo(event)">
   <div class="sb-sec">Principal</div>
   <div class="ni active" onclick="goNav(this,'dashboard')"><i class="ti ti-dashboard"></i><span>Dashboard</span></div>
   <div class="ni" onclick="goNav(this,'pos')"><i class="ti ti-shopping-cart"></i><span>Punto de Venta</span></div>
   <div class="sb-sec">Gestión</div>
-  <div class="ni" onclick="goNav(this,'inventario')"><i class="ti ti-package"></i><span>Inventario</span><span class="nb">3</span></div>
+  <div class="ni" onclick="goNav(this,'inventario')"><i class="ti ti-package"></i><span>Inventario</span><span class="nb" id="nb-inv">3</span></div>
   <div class="ni" onclick="goNav(this,'compras')"><i class="ti ti-truck-delivery"></i><span>Compras</span></div>
   <div class="ni" onclick="goNav(this,'ventas')"><i class="ti ti-file-invoice"></i><span>Ventas</span></div>
   <div class="ni" onclick="goNav(this,'cxc')"><i class="ti ti-credit-card"></i><span>Ctas. por Cobrar</span></div>
@@ -257,11 +230,13 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
 
     <!-- DASHBOARD -->
     <div class="mod active" id="mod-dashboard">
-      <div class="kpi-grid">
-        <div class="kpi"><div class="kpi-icon" style="background:#eff2ff;color:var(--blue)"><i class="ti ti-currency-dollar"></i></div><div class="kpi-label">Ventas del Mes</div><div class="kpi-value">$284,390</div><div class="kpi-change up"><i class="ti ti-trending-up"></i>+12.4%</div></div>
-        <div class="kpi"><div class="kpi-icon" style="background:#d1fae5;color:var(--green)"><i class="ti ti-chart-line"></i></div><div class="kpi-label">Utilidad Neta</div><div class="kpi-value">$67,820</div><div class="kpi-change up"><i class="ti ti-trending-up"></i>+8.1%</div></div>
+      <div class="stitle" id="dash-title">Dashboard</div>
+      <div class="ssub" id="dash-sub">Resumen general del negocio</div>
+      <div class="kpi-grid" id="kpi-grid">
+        <div class="kpi"><div class="kpi-icon" style="background:#eff2ff;color:var(--blue)"><i class="ti ti-currency-dollar"></i></div><div class="kpi-label">Ventas del Mes</div><div class="kpi-value" id="kpi-ventas">$0.00</div><div class="kpi-change up"><i class="ti ti-trending-up"></i>+12.4%</div></div>
+        <div class="kpi"><div class="kpi-icon" style="background:#d1fae5;color:var(--green)"><i class="ti ti-chart-line"></i></div><div class="kpi-label">Utilidad Neta</div><div class="kpi-value" id="kpi-utilidad">$0.00</div><div class="kpi-change up"><i class="ti ti-trending-up"></i>+8.1%</div></div>
         <div class="kpi"><div class="kpi-icon" style="background:#fef3c7;color:var(--amber)"><i class="ti ti-receipt-2"></i></div><div class="kpi-label">Gastos del Mes</div><div class="kpi-value">$48,160</div><div class="kpi-change dn"><i class="ti ti-trending-down"></i>+3.2%</div></div>
-        <div class="kpi"><div class="kpi-icon" style="background:#fee2e2;color:var(--red)"><i class="ti ti-shopping-bag"></i></div><div class="kpi-label">Ctas. por Cobrar</div><div class="kpi-value">$31,540</div><div class="kpi-change dn"><i class="ti ti-alert-circle"></i>4 vencidas</div></div>
+        <div class="kpi"><div class="kpi-icon" style="background:#fee2e2;color:var(--red)"><i class="ti ti-shopping-bag"></i></div><div class="kpi-label">Ctas. por Cobrar</div><div class="kpi-value" id="kpi-cxc">$0.00</div><div class="kpi-change dn" id="kpi-cxc-venc"><i class="ti ti-alert-circle"></i>0 vencidas</div></div>
       </div>
       <div class="charts-row">
         <div class="card"><div class="card-title">Ventas Mensuales <small style="color:var(--tx2);font-weight:400">últimos 7 meses</small></div><div class="cw"><canvas id="salesChart"></canvas></div></div>
@@ -280,14 +255,8 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
           </table>
         </div>
         <div class="card">
-          <div class="card-title">Alertas del Sistema <span class="badge br">5</span></div>
-          <div class="alerts">
-            <div class="alert ar"><i class="ti ti-package" style="color:var(--red);font-size:16px"></i>Stock crítico: Auriculares Pro (3 unid.)</div>
-            <div class="alert ar"><i class="ti ti-credit-card" style="color:var(--red);font-size:16px"></i>Factura #2041 vencida — TechCorp SA</div>
-            <div class="alert aw"><i class="ti ti-clock" style="color:var(--amber);font-size:16px"></i>Orden #PC-084 pendiente aprobación</div>
-            <div class="alert aw"><i class="ti ti-package" style="color:var(--amber);font-size:16px"></i>Stock bajo: Router WiFi 6 (8 unid.)</div>
-            <div class="alert ai"><i class="ti ti-truck-delivery" style="color:var(--blue);font-size:16px"></i>DataTech confirmó entrega hoy</div>
-          </div>
+          <div class="card-title">Alertas del Sistema <span class="badge br" id="alert-count">0</span></div>
+          <div class="alerts" id="dash-alerts"></div>
         </div>
       </div>
     </div>
@@ -296,8 +265,8 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
     <div class="mod" id="mod-pos">
       <div class="stitle">Punto de Venta</div>
       <div class="ssub" style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-        POS táctil · Compatible con código de barras, QR y NFC
-        <button class="btn btn-o btn-sm" onclick="openScanner()"><i class="ti ti-barcode"></i> Escanear código</button>
+        POS táctil · Código de barras, QR y NFC
+        <button class="btn btn-o btn-sm" onclick="openScanner()"><i class="ti ti-barcode"></i> Escanear</button>
         <button class="btn btn-o btn-sm" onclick="openQR()"><i class="ti ti-qrcode"></i> Leer QR</button>
       </div>
       <div class="pos-layout">
@@ -333,14 +302,14 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
     <!-- INVENTARIO -->
     <div class="mod" id="mod-inventario">
       <div class="stitle">Inventario</div>
-      <div class="ssub">Control de stock, categorías, lotes y alertas de mínimos</div>
+      <div class="ssub">Control de stock · Precio de costo y precio de venta</div>
       <div class="toolbar">
         <div class="sbox"><i class="ti ti-search" style="color:var(--tx2);font-size:15px"></i><input id="inv-search" placeholder="Buscar producto..." oninput="filterInv()"></div>
         <button class="btn btn-p" onclick="openModal('m-inv-nuevo')"><i class="ti ti-plus"></i> Nuevo Producto</button>
         <button class="btn btn-o" onclick="exportTable('inv-tbody','inventario')"><i class="ti ti-download"></i> Exportar CSV</button>
         <button class="btn btn-o" onclick="openScanner()"><i class="ti ti-barcode"></i> Escanear</button>
       </div>
-      <table class="dtbl"><thead><tr><th>Código</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>Mínimo</th><th>Precio</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <table class="dtbl"><thead><tr><th>Código</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>Mín.</th><th>P. Costo</th><th>P. Venta</th><th>Margen</th><th>Estado</th><th>Acciones</th></tr></thead>
       <tbody id="inv-tbody"></tbody></table>
     </div>
 
@@ -364,7 +333,7 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
         <button class="btn btn-o" onclick="openModal('m-cotizacion')"><i class="ti ti-file-description"></i> Cotización</button>
         <button class="btn btn-o" onclick="exportTable('vent-tbody','ventas')"><i class="ti ti-download"></i> Exportar CSV</button>
       </div>
-      <table class="dtbl"><thead><tr><th>Factura</th><th>Cliente</th><th>Fecha</th><th>Subtotal</th><th>IVA</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <table class="dtbl"><thead><tr><th>Factura</th><th>Cliente</th><th>NIT/CI</th><th>Fecha</th><th>Subtotal</th><th>IVA</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead>
       <tbody id="vent-tbody"></tbody></table>
     </div>
 
@@ -372,10 +341,10 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
     <div class="mod" id="mod-cxc">
       <div class="stitle">Cuentas por Cobrar</div><div class="ssub">Control de deudas, historial de pagos y alertas de vencimiento</div>
       <div class="kpi-grid">
-        <div class="kpi"><div class="kpi-icon" style="background:#eff2ff;color:var(--blue)"><i class="ti ti-clock-dollar"></i></div><div class="kpi-label">Por Cobrar Total</div><div class="kpi-value">$31,540</div></div>
-        <div class="kpi"><div class="kpi-icon" style="background:#fef3c7;color:var(--amber)"><i class="ti ti-clock"></i></div><div class="kpi-label">Por Vencer</div><div class="kpi-value">$18,200</div></div>
-        <div class="kpi"><div class="kpi-icon" style="background:#fee2e2;color:var(--red)"><i class="ti ti-alert-triangle"></i></div><div class="kpi-label">Vencidas</div><div class="kpi-value">$9,605</div></div>
-        <div class="kpi"><div class="kpi-icon" style="background:#d1fae5;color:var(--green)"><i class="ti ti-check"></i></div><div class="kpi-label">Cobrado Hoy</div><div class="kpi-value">$4,746</div></div>
+        <div class="kpi"><div class="kpi-icon" style="background:#eff2ff;color:var(--blue)"><i class="ti ti-clock-dollar"></i></div><div class="kpi-label">Por Cobrar Total</div><div class="kpi-value" id="cxc-total">$0.00</div></div>
+        <div class="kpi"><div class="kpi-icon" style="background:#fef3c7;color:var(--amber)"><i class="ti ti-clock"></i></div><div class="kpi-label">Por Vencer</div><div class="kpi-value" id="cxc-pvencer">$0.00</div></div>
+        <div class="kpi"><div class="kpi-icon" style="background:#fee2e2;color:var(--red)"><i class="ti ti-alert-triangle"></i></div><div class="kpi-label">Vencidas</div><div class="kpi-value" id="cxc-vencidas">$0.00</div></div>
+        <div class="kpi"><div class="kpi-icon" style="background:#d1fae5;color:var(--green)"><i class="ti ti-check"></i></div><div class="kpi-label">Cobrado Hoy</div><div class="kpi-value" id="cxc-cobrado">$0.00</div></div>
       </div>
       <table class="dtbl" style="margin-top:16px"><thead><tr><th>Cliente</th><th>Factura</th><th>Monto</th><th>Vencimiento</th><th>Días</th><th>Estado</th><th>Acciones</th></tr></thead>
       <tbody id="cxc-tbody"></tbody></table>
@@ -385,26 +354,18 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
     <div class="mod" id="mod-caja">
       <div class="stitle">Caja y Bancos</div><div class="ssub">Apertura, cierre, arqueos y conciliación bancaria</div>
       <div class="kpi-grid">
-        <div class="kpi"><div class="kpi-icon" style="background:#d1fae5;color:var(--green)"><i class="ti ti-cash"></i></div><div class="kpi-label">Saldo Caja Principal</div><div class="kpi-value">$12,840</div></div>
+        <div class="kpi"><div class="kpi-icon" style="background:#d1fae5;color:var(--green)"><i class="ti ti-cash"></i></div><div class="kpi-label">Saldo Caja Principal</div><div class="kpi-value" id="saldo-caja">$8,000.00</div></div>
         <div class="kpi"><div class="kpi-icon" style="background:#eff2ff;color:var(--blue)"><i class="ti ti-building-bank"></i></div><div class="kpi-label">Banco — Cta. Principal</div><div class="kpi-value">$84,320</div></div>
-        <div class="kpi"><div class="kpi-icon" style="background:#d1fae5;color:var(--green)"><i class="ti ti-arrow-up-circle"></i></div><div class="kpi-label">Ingresos del Día</div><div class="kpi-value">$8,290</div></div>
-        <div class="kpi"><div class="kpi-icon" style="background:#fee2e2;color:var(--red)"><i class="ti ti-arrow-down-circle"></i></div><div class="kpi-label">Egresos del Día</div><div class="kpi-value">$3,150</div></div>
+        <div class="kpi"><div class="kpi-icon" style="background:#d1fae5;color:var(--green)"><i class="ti ti-arrow-up-circle"></i></div><div class="kpi-label">Ingresos del Día</div><div class="kpi-value" id="caja-ing">$0.00</div></div>
+        <div class="kpi"><div class="kpi-icon" style="background:#fee2e2;color:var(--red)"><i class="ti ti-arrow-down-circle"></i></div><div class="kpi-label">Egresos del Día</div><div class="kpi-value" id="caja-egr">$0.00</div></div>
       </div>
       <div class="tbl-row" style="margin-top:14px">
-        <div class="card"><div class="card-title">Movimientos de Hoy</div>
-          <table class="mtbl">
-            <tr><th>Hora</th><th>Descripción</th><th>Tipo</th><th>Monto</th></tr>
-            <tr><td>09:14</td><td>Venta #FAC-2047</td><td><span class="badge bg">Ingreso</span></td><td style="color:var(--green)">+$4,746</td></tr>
-            <tr><td>10:30</td><td>Pago proveedor OC-090</td><td><span class="badge br">Egreso</span></td><td style="color:var(--red)">-$2,400</td></tr>
-            <tr><td>11:45</td><td>Venta POS #0021</td><td><span class="badge bg">Ingreso</span></td><td style="color:var(--green)">+$1,890</td></tr>
-            <tr><td>13:20</td><td>Pago servicios</td><td><span class="badge br">Egreso</span></td><td style="color:var(--red)">-$750</td></tr>
-          </table>
-        </div>
+        <div class="card"><div class="card-title">Movimientos de Hoy</div><table class="mtbl" id="mov-tabla"><tr><th>Hora</th><th>Descripción</th><th>Tipo</th><th>Monto</th></tr></table></div>
         <div class="card"><div class="card-title">Estado de Caja</div>
           <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd);font-size:13px;color:var(--tx)"><span>Saldo apertura</span><span style="font-weight:500">$8,000.00</span></div>
-          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd);font-size:13px"><span style="color:var(--tx)">Total ingresos</span><span style="color:var(--green);font-weight:500">+$8,290.00</span></div>
-          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd);font-size:13px"><span style="color:var(--tx)">Total egresos</span><span style="color:var(--red);font-weight:500">-$3,150.00</span></div>
-          <div style="display:flex;justify-content:space-between;padding:14px 0;font-size:15px;font-weight:700;color:var(--tx)"><span>Saldo actual</span><span style="color:var(--blue)">$13,140.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd);font-size:13px"><span style="color:var(--tx)">Total ingresos</span><span style="color:var(--green);font-weight:500" id="caja-ing2">+$0.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd);font-size:13px"><span style="color:var(--tx)">Total egresos</span><span style="color:var(--red);font-weight:500" id="caja-egr2">-$0.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:14px 0;font-size:15px;font-weight:700;color:var(--tx)"><span>Saldo actual</span><span style="color:var(--blue)" id="caja-saldo2">$8,000.00</span></div>
           <button class="btn btn-r" style="width:100%" onclick="openModal('m-cerrar-caja')"><i class="ti ti-lock"></i> Cerrar Caja</button>
         </div>
       </div>
@@ -418,7 +379,7 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
         <div class="fs" style="border-top-color:var(--purple)"><div class="fs-label">Calificados</div><div class="fs-count">67</div><div class="fs-val">$48,200 potencial</div></div>
         <div class="fs" style="border-top-color:var(--amber)"><div class="fs-label">Propuesta enviada</div><div class="fs-count">31</div><div class="fs-val">$112,000 potencial</div></div>
         <div class="fs" style="border-top-color:var(--teal)"><div class="fs-label">Negociación</div><div class="fs-count">14</div><div class="fs-val">$68,500 potencial</div></div>
-        <div class="fs" style="border-top-color:var(--green)"><div class="fs-label">Ganados</div><div class="fs-count">89</div><div class="fs-val">$284,390 cerrado</div></div>
+        <div class="fs" style="border-top-color:var(--green)"><div class="fs-label">Ganados</div><div class="fs-count">89</div><div class="fs-val" id="crm-cerrado">$0 cerrado</div></div>
         <div class="fs" style="border-top-color:var(--red)"><div class="fs-label">Perdidos</div><div class="fs-count">22</div><div class="fs-val">$31,800 perdido</div></div>
       </div>
       <div class="card"><div class="card-title">Clientes Frecuentes <button class="btn btn-sm btn-p" onclick="openModal('m-nuevo-cliente')" style="margin-left:auto"><i class="ti ti-plus"></i> Nuevo cliente</button></div><div id="client-list"></div></div>
@@ -428,10 +389,10 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
     <div class="mod" id="mod-rrhh">
       <div class="stitle">Recursos Humanos</div><div class="ssub">Empleados, contratos, asistencia, vacaciones y planillas</div>
       <div class="emp-grid">
-        <div class="estat"><i class="ti ti-users" style="font-size:24px;color:var(--blue)"></i><div class="estat-v" id="emp-total">5</div><div class="estat-l">Total Empleados</div></div>
-        <div class="estat"><i class="ti ti-user-check" style="font-size:24px;color:var(--green)"></i><div class="estat-v" id="emp-activos">4</div><div class="estat-l">Activos Hoy</div></div>
-        <div class="estat"><i class="ti ti-calendar-off" style="font-size:24px;color:var(--amber)"></i><div class="estat-v">1</div><div class="estat-l">En Vacaciones</div></div>
-        <div class="estat"><i class="ti ti-currency-dollar" style="font-size:24px;color:var(--purple)"></i><div class="estat-v" id="emp-planilla">$14,600</div><div class="estat-l">Planilla Mensual</div></div>
+        <div class="estat"><i class="ti ti-users" style="font-size:24px;color:var(--blue)"></i><div class="estat-v" id="emp-total">0</div><div class="estat-l">Total Empleados</div></div>
+        <div class="estat"><i class="ti ti-user-check" style="font-size:24px;color:var(--green)"></i><div class="estat-v" id="emp-activos">0</div><div class="estat-l">Activos Hoy</div></div>
+        <div class="estat"><i class="ti ti-calendar-off" style="font-size:24px;color:var(--amber)"></i><div class="estat-v" id="emp-vacaciones">0</div><div class="estat-l">En Vacaciones</div></div>
+        <div class="estat"><i class="ti ti-currency-dollar" style="font-size:24px;color:var(--purple)"></i><div class="estat-v" id="emp-planilla">$0</div><div class="estat-l">Planilla Mensual</div></div>
       </div>
       <div class="toolbar">
         <button class="btn btn-p" onclick="openModal('m-nuevo-emp')"><i class="ti ti-user-plus"></i> Nuevo Empleado</button>
@@ -468,7 +429,7 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
       <div class="card" style="margin-top:14px"><div class="card-title">Recomendaciones IA</div>
         <div class="alerts">
           <div class="alert ai" style="flex-direction:column;align-items:flex-start;gap:4px"><strong>Recompra sugerida</strong><span style="font-size:12px;color:var(--tx2)">Reponer Laptops ProBook X5 (+20 unidades) antes del 10 de junio para evitar quiebre de stock.</span></div>
-          <div class="alert ai" style="flex-direction:column;align-items:flex-start;gap:4px"><strong>Oportunidad de venta cruzada</strong><span style="font-size:12px;color:var(--tx2)">Clientes que compran Monitor UHD 27" tienen 74% probabilidad de adquirir soporte de monitor en 7 días.</span></div>
+          <div class="alert ai" style="flex-direction:column;align-items:flex-start;gap:4px"><strong>Oportunidad de venta cruzada</strong><span style="font-size:12px;color:var(--tx2)">Clientes que compran Monitor UHD 27" tienen 74% probabilidad de adquirir soporte en 7 días.</span></div>
           <div class="alert ar" style="flex-direction:column;align-items:flex-start;gap:4px"><strong>Anomalía financiera detectada</strong><span style="font-size:12px;color:var(--tx2)">Transacción inusual en Caja 2 el 28/05: $3,200 sin comprobante. Revisar con contador.</span></div>
         </div>
       </div>
@@ -487,13 +448,20 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
 
     <!-- CONFIG -->
     <div class="mod" id="mod-config">
-      <div class="stitle">Configuración</div><div class="ssub">Parámetros generales, seguridad, notificaciones e integraciones</div>
+      <div class="stitle">Configuración del Sistema</div>
+      <div class="ssub">Edita los datos reales de tu empresa, seguridad, notificaciones e integraciones</div>
       <div class="sg">
-        <div class="sc"><h3><i class="ti ti-building" style="color:var(--blue)"></i> Empresa</h3>
-          <div class="srow"><span>Nombre de empresa</span><span style="color:var(--tx2);font-size:12px">NexoCorp SA</span></div>
-          <div class="srow"><span>Moneda</span><span style="color:var(--tx2);font-size:12px">USD / Bs.</span></div>
-          <div class="srow"><span>Zona horaria</span><span style="color:var(--tx2);font-size:12px">GMT-4 (Bolivia)</span></div>
-          <div class="srow"><span>Sucursales activas</span><span style="color:var(--tx2);font-size:12px">3</span></div>
+        <div class="sc"><h3><i class="ti ti-building" style="color:var(--blue)"></i> Datos de la Empresa</h3>
+          <div class="srow"><span>Nombre de empresa</span><span style="color:var(--tx2);font-size:12px" id="cfg-nombre">NexoCorp SA</span></div>
+          <div class="srow"><span>NIT / RUC</span><span style="color:var(--tx2);font-size:12px" id="cfg-nit">1234567890</span></div>
+          <div class="srow"><span>Dirección</span><span style="color:var(--tx2);font-size:12px;text-align:right;max-width:130px" id="cfg-dir">Trinidad, Bolivia</span></div>
+          <div class="srow"><span>Teléfono</span><span style="color:var(--tx2);font-size:12px" id="cfg-tel">+591 000-0000</span></div>
+          <div class="srow"><span>Moneda</span><span style="color:var(--tx2);font-size:12px" id="cfg-moneda">USD / Bs.</span></div>
+          <div class="srow"><span>Zona horaria</span><span style="color:var(--tx2);font-size:12px" id="cfg-zona">GMT-4 (Bolivia)</span></div>
+          <div class="srow"><span>Sucursales activas</span><span style="color:var(--tx2);font-size:12px" id="cfg-suc">3</span></div>
+          <div style="margin-top:10px">
+            <button class="btn btn-p" style="width:100%;justify-content:center" onclick="openModal('m-empresa')"><i class="ti ti-edit"></i> Editar datos de la empresa</button>
+          </div>
         </div>
         <div class="sc"><h3><i class="ti ti-bell" style="color:var(--amber)"></i> Notificaciones</h3>
           <div class="srow"><span>Alertas de stock</span><div class="tgl on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></div></div>
@@ -519,7 +487,9 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
   </div>
 </div>
 
-<!-- ===== MODAL LOGO ===== -->
+<!-- ===== MODALES ===== -->
+
+<!-- LOGO MODAL -->
 <div class="ov" id="m-logo">
   <div class="modal">
     <div class="mhdr"><h3><i class="ti ti-photo"></i> Personalizar Logo y Nombre</h3><button class="mclose" onclick="closeModal('m-logo')"><i class="ti ti-x"></i></button></div>
@@ -527,22 +497,18 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
       <div class="logo-upload-area" onclick="document.getElementById('logo-input').click()">
         <i class="ti ti-upload" style="font-size:36px;color:var(--blue);display:block;margin-bottom:10px"></i>
         <p style="font-size:14px;font-weight:600;color:var(--tx)">Haz clic para subir tu logo</p>
-        <p style="font-size:12px;color:var(--tx2);margin-top:4px">PNG, JPG, SVG · Recomendado: 200×200 px</p>
-        <input type="file" id="logo-input" accept="image/*" onchange="previewLogo(event)">
+        <p style="font-size:12px;color:var(--tx2);margin-top:4px">PNG, JPG, SVG · Recomendado: fondo transparente</p>
       </div>
       <div class="logo-preview-row" id="logo-prev-row" style="display:none">
-        <div class="logo-prev-item">
-          <div class="logo-prev-box" id="logo-prev-box"></div>
-          Vista previa
-        </div>
+        <div class="logo-prev-box" id="logo-prev-box"></div>
         <div style="flex:1">
           <p style="font-size:12px;color:var(--green);font-weight:600;margin-bottom:6px"><i class="ti ti-check"></i> Logo cargado correctamente</p>
           <button class="btn btn-o btn-sm" onclick="document.getElementById('logo-input').click()"><i class="ti ti-refresh"></i> Cambiar imagen</button>
           <button class="btn btn-r btn-sm" style="margin-left:6px" onclick="removeLogo()"><i class="ti ti-trash"></i> Quitar logo</button>
         </div>
       </div>
-      <div class="logo-name-input">
-        <div class="frow"><label>Nombre de la empresa / sistema</label><input class="finput" id="logo-name-input" placeholder="Ej: MiEmpresa ERP" value="NexoERP"></div>
+      <div style="margin-top:14px">
+        <div class="frow"><label>Nombre del sistema / empresa</label><input class="finput" id="logo-name-input" placeholder="Ej: MiEmpresa ERP" value="NexoERP"></div>
         <div class="frow"><label>Subtítulo (opcional)</label><input class="finput" id="logo-sub-input" placeholder="Ej: v1.0 · Mi Empresa" value="v2.5 · SaaS"></div>
       </div>
     </div>
@@ -553,12 +519,98 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
   </div>
 </div>
 
-<!-- Nuevo Producto -->
-<div class="ov" id="m-inv-nuevo"><div class="modal"><div class="mhdr"><h3><i class="ti ti-package"></i> Nuevo Producto</h3><button class="mclose" onclick="closeModal('m-inv-nuevo')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="fgrid"><div class="frow"><label>Código</label><input class="finput" id="ni-cod" placeholder="PRD-00X"></div><div class="frow"><label>Nombre</label><input class="finput" id="ni-nom" placeholder="Nombre del producto"></div><div class="frow"><label>Categoría</label><select class="finput" id="ni-cat"><option>Laptops</option><option>Monitores</option><option>Periféricos</option><option>Audio</option><option>Redes</option><option>Almacenamiento</option></select></div><div class="frow"><label>Precio ($)</label><input class="finput" id="ni-precio" type="number" placeholder="0.00"></div><div class="frow"><label>Stock inicial</label><input class="finput" id="ni-stock" type="number" placeholder="0"></div><div class="frow"><label>Stock mínimo</label><input class="finput" id="ni-min" type="number" placeholder="0"></div></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-inv-nuevo')">Cancelar</button><button class="btn btn-p" onclick="guardarProducto()"><i class="ti ti-check"></i> Guardar</button></div></div></div>
-<div class="ov" id="m-inv-editar"><div class="modal"><div class="mhdr"><h3><i class="ti ti-edit"></i> Editar Producto</h3><button class="mclose" onclick="closeModal('m-inv-editar')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="fgrid"><div class="frow"><label>Código</label><input class="finput" id="ei-cod" readonly style="background:var(--bg)"></div><div class="frow"><label>Nombre</label><input class="finput" id="ei-nom"></div><div class="frow"><label>Categoría</label><select class="finput" id="ei-cat"><option>Laptops</option><option>Monitores</option><option>Periféricos</option><option>Audio</option><option>Redes</option><option>Almacenamiento</option></select></div><div class="frow"><label>Precio ($)</label><input class="finput" id="ei-precio" type="number"></div><div class="frow"><label>Stock</label><input class="finput" id="ei-stock" type="number"></div><div class="frow"><label>Stock mínimo</label><input class="finput" id="ei-min" type="number"></div></div><input type="hidden" id="ei-idx"></div><div class="mftr"><button class="btn btn-r" onclick="eliminarProducto()"><i class="ti ti-trash"></i> Eliminar</button><button class="btn btn-o" onclick="closeModal('m-inv-editar')">Cancelar</button><button class="btn btn-p" onclick="actualizarProducto()"><i class="ti ti-check"></i> Actualizar</button></div></div></div>
+<!-- EMPRESA MODAL (editar datos reales) -->
+<div class="ov" id="m-empresa">
+  <div class="modal">
+    <div class="mhdr"><h3><i class="ti ti-building"></i> Editar Datos de la Empresa</h3><button class="mclose" onclick="closeModal('m-empresa')"><i class="ti ti-x"></i></button></div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="frow"><label>Nombre de la empresa</label><input class="finput" id="emp-nombre" value="NexoCorp SA"></div>
+        <div class="frow"><label>NIT / RUC</label><input class="finput" id="emp-nit" value="1234567890"></div>
+        <div class="frow"><label>Dirección / Ciudad</label><input class="finput" id="emp-dir" value="Trinidad, Bolivia"></div>
+        <div class="frow"><label>Teléfono</label><input class="finput" id="emp-tel" value="+591 000-0000"></div>
+        <div class="frow"><label>Moneda principal</label><select class="finput" id="emp-moneda"><option>USD / Bs.</option><option>BOB / Bs.</option><option>USD</option><option>EUR</option></select></div>
+        <div class="frow"><label>Zona horaria</label><select class="finput" id="emp-zona"><option>GMT-4 (Bolivia)</option><option>GMT-5 (Perú)</option><option>GMT-3 (Argentina)</option><option>GMT-6 (México)</option></select></div>
+        <div class="frow"><label>Sucursales activas</label><input class="finput" id="emp-suc" type="number" value="3" min="1"></div>
+        <div class="frow"><label>Email de contacto</label><input class="finput" id="emp-email" type="email" value="contacto@nexocorp.com"></div>
+      </div>
+    </div>
+    <div class="mftr">
+      <button class="btn btn-o" onclick="closeModal('m-empresa')">Cancelar</button>
+      <button class="btn btn-p" onclick="guardarEmpresa()"><i class="ti ti-check"></i> Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<!-- Nuevo/Editar Producto (con precio costo Y precio venta) -->
+<div class="ov" id="m-inv-nuevo">
+  <div class="modal">
+    <div class="mhdr"><h3><i class="ti ti-package"></i> Nuevo Producto</h3><button class="mclose" onclick="closeModal('m-inv-nuevo')"><i class="ti ti-x"></i></button></div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="frow"><label>Código</label><input class="finput" id="ni-cod" placeholder="PRD-00X"></div>
+        <div class="frow"><label>Nombre</label><input class="finput" id="ni-nom" placeholder="Nombre del producto"></div>
+        <div class="frow"><label>Categoría</label><select class="finput" id="ni-cat"><option>Laptops</option><option>Monitores</option><option>Periféricos</option><option>Audio</option><option>Redes</option><option>Almacenamiento</option></select></div>
+        <div class="frow"><label>Stock inicial</label><input class="finput" id="ni-stock" type="number" placeholder="0"></div>
+        <div class="frow"><label>Stock mínimo</label><input class="finput" id="ni-min" type="number" placeholder="0"></div>
+        <div class="frow"><!-- espacio --></div>
+        <div class="frow"><label>Precio de Costo ($)</label><input class="finput" id="ni-costo" type="number" placeholder="0.00" oninput="calcMargenNuevo()"></div>
+        <div class="frow"><label>Precio de Venta ($)</label><input class="finput" id="ni-venta" type="number" placeholder="0.00" oninput="calcMargenNuevo()"></div>
+      </div>
+      <div style="background:var(--bg);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--tx2)" id="ni-margen-info">Ingresa costo y precio de venta para ver el margen.</div>
+    </div>
+    <div class="mftr"><button class="btn btn-o" onclick="closeModal('m-inv-nuevo')">Cancelar</button><button class="btn btn-p" onclick="guardarProducto()"><i class="ti ti-check"></i> Guardar</button></div>
+  </div>
+</div>
+
+<div class="ov" id="m-inv-editar">
+  <div class="modal">
+    <div class="mhdr"><h3><i class="ti ti-edit"></i> Editar Producto</h3><button class="mclose" onclick="closeModal('m-inv-editar')"><i class="ti ti-x"></i></button></div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="frow"><label>Código</label><input class="finput" id="ei-cod" readonly style="background:var(--bg)"></div>
+        <div class="frow"><label>Nombre</label><input class="finput" id="ei-nom"></div>
+        <div class="frow"><label>Categoría</label><select class="finput" id="ei-cat"><option>Laptops</option><option>Monitores</option><option>Periféricos</option><option>Audio</option><option>Redes</option><option>Almacenamiento</option></select></div>
+        <div class="frow"><label>Stock</label><input class="finput" id="ei-stock" type="number"></div>
+        <div class="frow"><label>Stock mínimo</label><input class="finput" id="ei-min" type="number"></div>
+        <div class="frow"><!-- espacio --></div>
+        <div class="frow"><label>Precio de Costo ($)</label><input class="finput" id="ei-costo" type="number" oninput="calcMargenEditar()"></div>
+        <div class="frow"><label>Precio de Venta ($)</label><input class="finput" id="ei-venta" type="number" oninput="calcMargenEditar()"></div>
+      </div>
+      <div style="background:var(--bg);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--tx2)" id="ei-margen-info"></div>
+      <input type="hidden" id="ei-idx">
+    </div>
+    <div class="mftr">
+      <button class="btn btn-r" onclick="eliminarProducto()"><i class="ti ti-trash"></i> Eliminar</button>
+      <button class="btn btn-o" onclick="closeModal('m-inv-editar')">Cancelar</button>
+      <button class="btn btn-p" onclick="actualizarProducto()"><i class="ti ti-check"></i> Actualizar</button>
+    </div>
+  </div>
+</div>
+
+<!-- COMPRAS -->
 <div class="ov" id="m-compra-nueva"><div class="modal"><div class="mhdr"><h3><i class="ti ti-truck-delivery"></i> Nueva Orden de Compra</h3><button class="mclose" onclick="closeModal('m-compra-nueva')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="fgrid"><div class="frow"><label>Proveedor</label><select class="finput" id="co-prov"><option>TechDistrib SA</option><option>DataTech Ltda</option><option>InnovaComp</option><option>GlobalTech</option></select></div><div class="frow"><label>Fecha requerida</label><input class="finput" id="co-fecha" type="date"></div><div class="frow"><label>Total estimado ($)</label><input class="finput" id="co-total" type="number" placeholder="0.00"></div><div class="frow"><label>Cantidad de ítems</label><input class="finput" id="co-items" type="number" placeholder="0"></div></div><div class="frow"><label>Observaciones</label><textarea class="finput" id="co-obs" rows="2" placeholder="Notas adicionales..."></textarea></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-compra-nueva')">Cancelar</button><button class="btn btn-p" onclick="guardarOrden()"><i class="ti ti-check"></i> Crear Orden</button></div></div></div>
 <div class="ov" id="m-recepcion"><div class="modal"><div class="mhdr"><h3><i class="ti ti-truck-return"></i> Recepción de Mercadería</h3><button class="mclose" onclick="closeModal('m-recepcion')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="fgrid"><div class="frow"><label>Orden de compra</label><select class="finput"><option>#OC-092 — TechDistrib SA</option><option>#OC-091 — DataTech Ltda</option></select></div><div class="frow"><label>Fecha recepción</label><input class="finput" type="date"></div><div class="frow"><label>Ítems recibidos</label><input class="finput" type="number" placeholder="0"></div><div class="frow"><label>Responsable</label><input class="finput" placeholder="Nombre del responsable"></div></div><div class="frow"><label>Observaciones</label><textarea class="finput" rows="2" placeholder="Estado de los productos, faltantes, etc."></textarea></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-recepcion')">Cancelar</button><button class="btn btn-g" onclick="flash('Recepción registrada correctamente','ok');closeModal('m-recepcion')"><i class="ti ti-check"></i> Confirmar Recepción</button></div></div></div>
-<div class="ov" id="m-venta-nueva"><div class="modal"><div class="mhdr"><h3><i class="ti ti-file-invoice"></i> Nueva Factura</h3><button class="mclose" onclick="closeModal('m-venta-nueva')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="fgrid"><div class="frow"><label>Cliente</label><select class="finput" id="fv-cli"><option>Empresa Digital SRL</option><option>TechCorp SA</option><option>InnoSoft Ltda</option><option>Comercial XYZ</option><option>MegaStore</option><option>Consumidor Final</option></select></div><div class="frow"><label>Fecha</label><input class="finput" type="date" id="fv-fecha"></div><div class="frow"><label>Subtotal ($)</label><input class="finput" id="fv-sub" type="number" placeholder="0.00" oninput="calcFacIVA()"></div><div class="frow"><label>IVA 13% ($)</label><input class="finput" id="fv-iva" readonly style="background:var(--bg)"></div><div class="frow"><label>Total ($)</label><input class="finput" id="fv-tot" readonly style="background:var(--bg);font-weight:700"></div><div class="frow"><label>Estado</label><select class="finput" id="fv-est"><option>Pagado</option><option>Pendiente</option><option>Crédito</option></select></div></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-venta-nueva')">Cancelar</button><button class="btn btn-p" onclick="guardarVenta()"><i class="ti ti-check"></i> Emitir Factura</button></div></div></div>
+
+<!-- FACTURA con NIT del cliente -->
+<div class="ov" id="m-venta-nueva">
+  <div class="modal">
+    <div class="mhdr"><h3><i class="ti ti-file-invoice"></i> Nueva Factura</h3><button class="mclose" onclick="closeModal('m-venta-nueva')"><i class="ti ti-x"></i></button></div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="frow"><label>Cliente</label><select class="finput" id="fv-cli" onchange="autoFillNIT()"><option value="Empresa Digital SRL|4501234">Empresa Digital SRL</option><option value="TechCorp SA|8901234">TechCorp SA</option><option value="InnoSoft Ltda|3201234">InnoSoft Ltda</option><option value="Comercial XYZ|7801234">Comercial XYZ</option><option value="MegaStore|5601234">MegaStore</option><option value="Consumidor Final|CF">Consumidor Final</option></select></div>
+        <div class="frow"><label>NIT / CI del comprador</label><input class="finput" id="fv-nit" placeholder="Ej: 4501234"></div>
+        <div class="frow"><label>Fecha</label><input class="finput" type="date" id="fv-fecha"></div>
+        <div class="frow"><label>Estado</label><select class="finput" id="fv-est"><option>Pagado</option><option>Pendiente</option><option>Crédito</option></select></div>
+        <div class="frow"><label>Subtotal ($)</label><input class="finput" id="fv-sub" type="number" placeholder="0.00" oninput="calcFacIVA()"></div>
+        <div class="frow"><label>IVA 13% ($)</label><input class="finput" id="fv-iva" readonly style="background:var(--bg)"></div>
+      </div>
+      <div class="frow"><label>Total ($)</label><input class="finput" id="fv-tot" readonly style="background:var(--bg);font-weight:700;font-size:16px"></div>
+    </div>
+    <div class="mftr"><button class="btn btn-o" onclick="closeModal('m-venta-nueva')">Cancelar</button><button class="btn btn-p" onclick="guardarVenta()"><i class="ti ti-check"></i> Emitir Factura</button></div>
+  </div>
+</div>
+
 <div class="ov" id="m-cotizacion"><div class="modal"><div class="mhdr"><h3><i class="ti ti-file-description"></i> Nueva Cotización</h3><button class="mclose" onclick="closeModal('m-cotizacion')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="fgrid"><div class="frow"><label>Cliente</label><input class="finput" placeholder="Nombre del cliente"></div><div class="frow"><label>Validez (días)</label><input class="finput" type="number" value="15"></div><div class="frow"><label>Monto ($)</label><input class="finput" type="number" placeholder="0.00"></div><div class="frow"><label>Moneda</label><select class="finput"><option>USD</option><option>BOB</option></select></div></div><div class="frow"><label>Descripción</label><textarea class="finput" rows="3" placeholder="Detalle los productos o servicios cotizados..."></textarea></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-cotizacion')">Cancelar</button><button class="btn btn-p" onclick="flash('Cotización generada y enviada por email','ok');closeModal('m-cotizacion')"><i class="ti ti-send"></i> Enviar</button></div></div></div>
 <div class="ov" id="m-pago-cxc"><div class="modal"><div class="mhdr"><h3><i class="ti ti-cash"></i> Registrar Pago</h3><button class="mclose" onclick="closeModal('m-pago-cxc')"><i class="ti ti-x"></i></button></div><div class="mbody"><div id="pago-info" style="background:var(--bg);border-radius:8px;padding:12px;margin-bottom:16px;font-size:13px;color:var(--tx)"></div><div class="fgrid"><div class="frow"><label>Monto a pagar ($)</label><input class="finput" id="pg-monto" type="number" placeholder="0.00"></div><div class="frow"><label>Fecha de pago</label><input class="finput" id="pg-fecha" type="date"></div><div class="frow"><label>Método</label><select class="finput" id="pg-metodo"><option>Efectivo</option><option>Transferencia</option><option>QR</option><option>Tarjeta</option></select></div><div class="frow"><label>Nro. comprobante</label><input class="finput" id="pg-comp" placeholder="REF-0000"></div></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-pago-cxc')">Cancelar</button><button class="btn btn-g" onclick="confirmarPago()"><i class="ti ti-check"></i> Confirmar Pago</button></div></div></div>
 <div class="ov" id="m-nuevo-emp"><div class="modal"><div class="mhdr"><h3><i class="ti ti-user-plus"></i> Nuevo Empleado</h3><button class="mclose" onclick="closeModal('m-nuevo-emp')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="fgrid"><div class="frow"><label>Nombre completo</label><input class="finput" id="ee-nom" placeholder="Nombre Apellido"></div><div class="frow"><label>Cargo</label><input class="finput" id="ee-cargo" placeholder="Ej: Vendedor"></div><div class="frow"><label>Departamento</label><select class="finput" id="ee-depto"><option>Comercial</option><option>Finanzas</option><option>Tecnología</option><option>Logística</option><option>Administración</option></select></div><div class="frow"><label>Fecha de ingreso</label><input class="finput" id="ee-fecha" type="date"></div><div class="frow"><label>Salario ($)</label><input class="finput" id="ee-salario" type="number" placeholder="0.00"></div><div class="frow"><label>Email</label><input class="finput" id="ee-email" type="email" placeholder="correo@empresa.com"></div></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-nuevo-emp')">Cancelar</button><button class="btn btn-p" onclick="guardarEmpleado()"><i class="ti ti-check"></i> Guardar</button></div></div></div>
@@ -566,58 +618,88 @@ body.dark .kpi-icon[style*="background:#f3e8ff"]{background:#4c1d95!important}
 <div class="ov" id="m-nuevo-user"><div class="modal"><div class="mhdr"><h3><i class="ti ti-user-plus"></i> Nuevo Usuario</h3><button class="mclose" onclick="closeModal('m-nuevo-user')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="fgrid"><div class="frow"><label>Nombre completo</label><input class="finput" id="nu-nom" placeholder="Nombre Apellido"></div><div class="frow"><label>Email</label><input class="finput" id="nu-email" type="email" placeholder="usuario@nexo.com"></div><div class="frow"><label>Rol</label><select class="finput" id="nu-rol"><option>Super Admin</option><option>Gerente</option><option>Cajero</option><option>Vendedor</option><option>Contador</option></select></div><div class="frow"><label>Sucursal</label><select class="finput" id="nu-suc"><option>Central</option><option>Sucursal Norte</option><option>Sucursal Sur</option></select></div><div class="frow"><label>Contraseña</label><input class="finput" id="nu-pass" type="password" placeholder="••••••••"></div><div class="frow"><label>Estado</label><select class="finput" id="nu-est"><option>Activo</option><option>Inactivo</option></select></div></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-nuevo-user')">Cancelar</button><button class="btn btn-p" onclick="guardarUsuario()"><i class="ti ti-check"></i> Crear Usuario</button></div></div></div>
 <div class="ov" id="m-editar-user"><div class="modal"><div class="mhdr"><h3><i class="ti ti-edit"></i> Editar Usuario</h3><button class="mclose" onclick="closeModal('m-editar-user')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="fgrid"><div class="frow"><label>Nombre completo</label><input class="finput" id="eu-nom"></div><div class="frow"><label>Email</label><input class="finput" id="eu-email" type="email"></div><div class="frow"><label>Rol</label><select class="finput" id="eu-rol"><option>Super Admin</option><option>Gerente</option><option>Cajero</option><option>Vendedor</option><option>Contador</option></select></div><div class="frow"><label>Sucursal</label><select class="finput" id="eu-suc"><option>Central</option><option>Sucursal Norte</option><option>Sucursal Sur</option></select></div><div class="frow"><label>Estado</label><select class="finput" id="eu-est"><option>Activo</option><option>Inactivo</option></select></div></div><input type="hidden" id="eu-idx"></div><div class="mftr"><button class="btn btn-r" onclick="eliminarUsuario()"><i class="ti ti-trash"></i> Eliminar</button><button class="btn btn-o" onclick="closeModal('m-editar-user')">Cancelar</button><button class="btn btn-p" onclick="actualizarUsuario()"><i class="ti ti-check"></i> Actualizar</button></div></div></div>
 <div class="ov" id="m-roles"><div class="modal"><div class="mhdr"><h3><i class="ti ti-shield"></i> Roles y Permisos</h3><button class="mclose" onclick="closeModal('m-roles')"><i class="ti ti-x"></i></button></div><div class="mbody"><table class="dtbl"><thead><tr><th>Rol</th><th>Usuarios</th><th>Permisos</th></tr></thead><tbody><tr><td><span class="badge br">Super Admin</span></td><td>1</td><td>Acceso total</td></tr><tr><td><span class="badge bb">Gerente</span></td><td>1</td><td>Todo excepto configuración</td></tr><tr><td><span class="badge ba">Cajero</span></td><td>1</td><td>POS, Caja, Ventas</td></tr><tr><td><span class="badge bb">Vendedor</span></td><td>1</td><td>POS, Ventas, CRM</td></tr><tr><td><span class="badge bp">Contador</span></td><td>1</td><td>Finanzas, Reportes, CxC</td></tr></tbody></table></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-roles')">Cerrar</button><button class="btn btn-p" onclick="flash('Roles actualizados','ok');closeModal('m-roles')"><i class="ti ti-check"></i> Guardar cambios</button></div></div></div>
-<div class="ov" id="m-scanner"><div class="modal"><div class="mhdr"><h3><i class="ti ti-barcode"></i> Lector de Código de Barras</h3><button class="mclose" onclick="closeModal('m-scanner')"><i class="ti ti-x"></i></button></div><div class="mbody"><p style="font-size:13px;color:var(--tx2);margin-bottom:12px">Conecta un lector USB y escanea el código, o escríbelo manualmente:</p><div class="barcode-row"><input id="barcode-input" placeholder="Escanea o escribe el código..." onkeydown="if(event.key==='Enter')buscarCodigo()"><button class="btn btn-p" onclick="buscarCodigo()"><i class="ti ti-search"></i> Buscar</button></div><div id="barcode-result" style="min-height:60px"></div><div style="margin-top:14px"><p style="font-size:12px;color:var(--tx2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Códigos de ejemplo</p><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-o btn-sm" onclick="document.getElementById('barcode-input').value='PRD-001';buscarCodigo()">PRD-001</button><button class="btn btn-o btn-sm" onclick="document.getElementById('barcode-input').value='PRD-003';buscarCodigo()">PRD-003</button><button class="btn btn-o btn-sm" onclick="document.getElementById('barcode-input').value='PRD-005';buscarCodigo()">PRD-005</button></div></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-scanner')">Cerrar</button></div></div></div>
+<div class="ov" id="m-scanner"><div class="modal"><div class="mhdr"><h3><i class="ti ti-barcode"></i> Lector de Código de Barras</h3><button class="mclose" onclick="closeModal('m-scanner')"><i class="ti ti-x"></i></button></div><div class="mbody"><p style="font-size:13px;color:var(--tx2);margin-bottom:12px">Conecta un lector USB o escríbelo manualmente:</p><div class="barcode-row"><input id="barcode-input" placeholder="Escanea o escribe el código..." onkeydown="if(event.key==='Enter')buscarCodigo()"><button class="btn btn-p" onclick="buscarCodigo()"><i class="ti ti-search"></i> Buscar</button></div><div id="barcode-result" style="min-height:60px"></div><div style="margin-top:14px"><p style="font-size:12px;color:var(--tx2);font-weight:600;margin-bottom:8px">Códigos de ejemplo</p><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-o btn-sm" onclick="document.getElementById('barcode-input').value='PRD-001';buscarCodigo()">PRD-001</button><button class="btn btn-o btn-sm" onclick="document.getElementById('barcode-input').value='PRD-003';buscarCodigo()">PRD-003</button><button class="btn btn-o btn-sm" onclick="document.getElementById('barcode-input').value='PRD-005';buscarCodigo()">PRD-005</button></div></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-scanner')">Cerrar</button></div></div></div>
 <div class="ov" id="m-qr"><div class="modal"><div class="mhdr"><h3><i class="ti ti-qrcode"></i> Lector QR</h3><button class="mclose" onclick="closeModal('m-qr')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="qr-area" onclick="simularQR()"><i class="ti ti-qrcode-off"></i><p style="font-size:14px;font-weight:600;margin-bottom:4px;color:var(--tx)">Área de escaneo QR</p><p style="font-size:12px;color:var(--tx2)">Haz clic para simular escaneo</p></div><div id="qr-result" style="min-height:40px"></div><div class="frow"><label>O ingresa código QR manualmente</label><div style="display:flex;gap:8px"><input class="finput" id="qr-manual" placeholder="Código QR del producto"><button class="btn btn-p" onclick="buscarQR()"><i class="ti ti-search"></i></button></div></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-qr')">Cerrar</button></div></div></div>
 <div class="ov" id="m-cerrar-caja"><div class="modal"><div class="mhdr"><h3><i class="ti ti-lock"></i> Cerrar Caja</h3><button class="mclose" onclick="closeModal('m-cerrar-caja')"><i class="ti ti-x"></i></button></div><div class="mbody"><div style="background:#fff5f5;border-radius:8px;padding:14px;margin-bottom:14px;border-left:3px solid var(--red);font-size:13px;color:var(--tx)"><i class="ti ti-alert-triangle" style="color:var(--red);margin-right:8px"></i>Esta acción cerrará la sesión de caja del día.</div><div class="fgrid"><div class="frow"><label>Efectivo en caja</label><input class="finput" type="number" placeholder="0.00"></div><div class="frow"><label>Responsable</label><input class="finput" value="Admin Principal" readonly style="background:var(--bg)"></div></div><div class="frow"><label>Observaciones</label><textarea class="finput" rows="2" placeholder="Novedades del día..."></textarea></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-cerrar-caja')">Cancelar</button><button class="btn btn-r" onclick="flash('Caja cerrada correctamente','ok');closeModal('m-cerrar-caja')"><i class="ti ti-lock"></i> Confirmar Cierre</button></div></div></div>
 <div class="ov" id="m-nuevo-cliente"><div class="modal"><div class="mhdr"><h3><i class="ti ti-user-plus"></i> Nuevo Cliente</h3><button class="mclose" onclick="closeModal('m-nuevo-cliente')"><i class="ti ti-x"></i></button></div><div class="mbody"><div class="fgrid"><div class="frow"><label>Nombre / Empresa</label><input class="finput" id="nc-nom" placeholder="Empresa SRL"></div><div class="frow"><label>Contacto</label><input class="finput" id="nc-cont" placeholder="Nombre del contacto"></div><div class="frow"><label>Teléfono</label><input class="finput" id="nc-tel" placeholder="+591 ..."></div><div class="frow"><label>Email</label><input class="finput" id="nc-email" type="email"></div><div class="frow"><label>NIT / CI</label><input class="finput" id="nc-nit" placeholder="0000000"></div><div class="frow"><label>Límite de crédito ($)</label><input class="finput" id="nc-cred" type="number" value="0"></div></div></div><div class="mftr"><button class="btn btn-o" onclick="closeModal('m-nuevo-cliente')">Cancelar</button><button class="btn btn-p" onclick="guardarCliente()"><i class="ti ti-check"></i> Guardar</button></div></div></div>
-<div class="ov" id="m-recibo"><div class="modal"><div class="mhdr"><h3 id="recibo-title"><i class="ti ti-receipt"></i> Recibo</h3><button class="mclose" onclick="closeModal('m-recibo')"><i class="ti ti-x"></i></button></div><div class="recibo" id="recibo-content"></div><div class="mftr"><button class="btn btn-o" onclick="window.print()"><i class="ti ti-printer"></i> Imprimir</button><button class="btn btn-o" onclick="showFacturaPOS()"><i class="ti ti-file-invoice"></i> Ver Factura</button><button class="btn btn-p" onclick="closeModal('m-recibo')"><i class="ti ti-check"></i> Cerrar</button></div></div></div>
 
-<!-- MODAL LICENCIA VENCIDA -->
-<div class="ov" id="m-expired" style="z-index:9999">
-  <div class="modal" style="border-top:4px solid var(--red)">
-    <div class="mhdr"><h3><i class="ti ti-lock" style="color:var(--red)"></i> Licencia vencida</h3></div>
-    <div class="mbody" style="text-align:center;padding:30px">
-      <i class="ti ti-calendar-x" style="font-size:56px;color:var(--red);display:block;margin-bottom:16px"></i>
-      <p style="font-size:16px;font-weight:700;color:var(--tx);margin-bottom:8px">Tu período gratuito ha finalizado</p>
-      <p style="font-size:13px;color:var(--tx2);margin-bottom:20px">El acceso gratuito de 12 meses venció el <strong id="exp-date-label"></strong>.<br>Renueva tu licencia para continuar usando el sistema.</p>
-      <button class="btn btn-p" style="width:100%;justify-content:center;padding:12px" onclick="flash('Redirigiendo al portal de pagos...','ok')"><i class="ti ti-credit-card"></i> Renovar licencia ahora</button>
+<!-- RECIBO POS con NIT comprador -->
+<div class="ov" id="m-recibo">
+  <div class="modal">
+    <div class="mhdr"><h3 id="recibo-title"><i class="ti ti-receipt"></i> Recibo</h3><button class="mclose" onclick="closeModal('m-recibo')"><i class="ti ti-x"></i></button></div>
+    <!-- Campo NIT comprador en recibo -->
+    <div style="padding:12px 20px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px">
+      <label style="font-size:12px;color:var(--tx2);font-weight:600;white-space:nowrap">NIT / CI del comprador:</label>
+      <input class="finput" id="recibo-nit" placeholder="CF" style="max-width:180px;padding:6px 10px">
+      <button class="btn btn-o btn-sm" onclick="actualizarReciboNIT()"><i class="ti ti-refresh"></i> Actualizar</button>
+    </div>
+    <div class="recibo" id="recibo-content"></div>
+    <div class="mftr">
+      <button class="btn btn-o" onclick="window.print()"><i class="ti ti-printer"></i> Imprimir</button>
+      <button class="btn btn-o" onclick="showFacturaPOS()"><i class="ti ti-file-invoice"></i> Ver Factura</button>
+      <button class="btn btn-p" onclick="closeModal('m-recibo')"><i class="ti ti-check"></i> Cerrar</button>
     </div>
   </div>
 </div>
 
 <script>
-/* ===== DARK MODE ===== */
+/* ===========================
+   DATOS GLOBALES DE EMPRESA
+=========================== */
+var empresa = {
+  nombre: 'NexoCorp SA',
+  nit: '1234567890',
+  dir: 'Trinidad, Bolivia',
+  tel: '+591 000-0000',
+  moneda: 'USD / Bs.',
+  zona: 'GMT-4 (Bolivia)',
+  suc: '3',
+  email: 'contacto@nexocorp.com'
+};
+
+function guardarEmpresa(){
+  empresa.nombre = document.getElementById('emp-nombre').value.trim() || empresa.nombre;
+  empresa.nit    = document.getElementById('emp-nit').value.trim() || empresa.nit;
+  empresa.dir    = document.getElementById('emp-dir').value.trim() || empresa.dir;
+  empresa.tel    = document.getElementById('emp-tel').value.trim() || empresa.tel;
+  empresa.moneda = document.getElementById('emp-moneda').value;
+  empresa.zona   = document.getElementById('emp-zona').value;
+  empresa.suc    = document.getElementById('emp-suc').value;
+  empresa.email  = document.getElementById('emp-email').value.trim();
+  // Actualizar vista Configuración
+  document.getElementById('cfg-nombre').textContent = empresa.nombre;
+  document.getElementById('cfg-nit').textContent    = empresa.nit;
+  document.getElementById('cfg-dir').textContent    = empresa.dir;
+  document.getElementById('cfg-tel').textContent    = empresa.tel;
+  document.getElementById('cfg-moneda').textContent = empresa.moneda;
+  document.getElementById('cfg-zona').textContent   = empresa.zona;
+  document.getElementById('cfg-suc').textContent    = empresa.suc;
+  closeModal('m-empresa');
+  flash('Datos de la empresa guardados correctamente','ok');
+}
+
+/* ===========================
+   DARK MODE
+=========================== */
 var isDark=false;
 function toggleDark(){
   isDark=!isDark;
   document.body.classList.toggle('dark',isDark);
   var btn=document.getElementById('dark-btn');
   btn.innerHTML=isDark?'<i class="ti ti-sun"></i>':'<i class="ti ti-moon"></i>';
-  btn.title=isDark?'Modo claro':'Modo oscuro';
-  // update Chart.js colors
-  var gridC=isDark?'rgba(255,255,255,.06)':'rgba(0,0,0,.05)';
-  var tickC=isDark?'#94a3b8':'#6b7280';
-  Chart.instances&&Object.values(Chart.instances).forEach(function(c){
-    if(!c.options.scales)return;
-    ['x','y'].forEach(function(ax){
-      if(c.options.scales[ax]){
-        if(c.options.scales[ax].grid)c.options.scales[ax].grid.color=gridC;
-        if(c.options.scales[ax].ticks)c.options.scales[ax].ticks.color=tickC;
-      }
-    });
-    c.update();
-  });
 }
 
-/* ===== LOGO ===== */
+/* ===========================
+   LOGO
+=========================== */
 var logoDataURL='';
 function previewLogo(e){
-  var f=e.target.files[0];if(!f)return;
+  var f=e.target.files[0]; if(!f)return;
   var r=new FileReader();
   r.onload=function(ev){
     logoDataURL=ev.target.result;
     var pb=document.getElementById('logo-prev-box');
-    pb.innerHTML='<img src="'+logoDataURL+'" style="width:100%;height:100%;object-fit:contain;border-radius:8px">';
+    pb.innerHTML='<img src="'+logoDataURL+'">';
     document.getElementById('logo-prev-row').style.display='flex';
   };
   r.readAsDataURL(f);
@@ -631,39 +713,19 @@ function applyLogo(){
   var name=document.getElementById('logo-name-input').value.trim()||'NexoERP';
   var sub=document.getElementById('logo-sub-input').value.trim();
   document.getElementById('sb-name').textContent=name;
-  document.querySelector('.sb-logo-sub').textContent=sub;
+  document.getElementById('sb-sub').textContent=sub;
   document.title=name;
   var icon=document.getElementById('sb-default-icon');
   var img=document.getElementById('sb-logo-img');
-  if(logoDataURL){
-    icon.style.display='none';
-    img.src=logoDataURL;
-    img.style.display='block';
-  } else {
-    icon.style.display='';
-    img.style.display='none';
-  }
+  if(logoDataURL){icon.style.display='none';img.src=logoDataURL;img.style.display='block';}
+  else{icon.style.display='';img.style.display='none';}
   closeModal('m-logo');
   flash('Logo y nombre aplicados correctamente','ok');
 }
 
-/* ===== LICENCIA ===== */
-// Cambia ACTIVATION_DATE a la fecha real de activación en formato ISO
-var ACTIVATION_DATE='2027-05-30'; // ← modifica esta fecha al activar
-var FREE_MONTHS=12;
-function checkLicense(){
-  var act=new Date(ACTIVATION_DATE);
-  var exp=new Date(act);
-  exp.setMonth(exp.getMonth()+FREE_MONTHS);
-  var now=new Date();
-  if(now>exp){
-    document.getElementById('exp-date-label').textContent=exp.toLocaleDateString('es-BO',{day:'2-digit',month:'long',year:'numeric'});
-    document.getElementById('m-expired').classList.add('show');
-  }
-}
-checkLicense();
-
-/* ===== NAV ===== */
+/* ===========================
+   NAV
+=========================== */
 var titles={dashboard:'Dashboard',inventario:'Inventario',pos:'Punto de Venta',compras:'Compras',ventas:'Ventas y Facturación',cxc:'Cuentas por Cobrar',caja:'Caja y Bancos',crm:'CRM — Clientes',rrhh:'Recursos Humanos',reportes:'Reportes',ia:'IA Empresarial',usuarios:'Usuarios y Roles',config:'Configuración'};
 var chartsInited={};
 function goNav(el,id){
@@ -674,9 +736,20 @@ function goNav(el,id){
   document.getElementById('pageTitle').textContent=titles[id]||id;
   if(id==='reportes'&&!chartsInited.rep){setTimeout(initRepCharts,80);chartsInited.rep=true;}
 }
-function openModal(id){document.getElementById(id).classList.add('show')}
+function openModal(id){
+  // Pre-llenar modal empresa con datos actuales
+  if(id==='m-empresa'){
+    document.getElementById('emp-nombre').value=empresa.nombre;
+    document.getElementById('emp-nit').value=empresa.nit;
+    document.getElementById('emp-dir').value=empresa.dir;
+    document.getElementById('emp-tel').value=empresa.tel;
+    document.getElementById('emp-email').value=empresa.email;
+    document.getElementById('emp-suc').value=empresa.suc;
+  }
+  document.getElementById(id).classList.add('show');
+}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
-document.querySelectorAll('.ov').forEach(function(ov){ov.addEventListener('click',function(e){if(e.target===ov&&ov.id!=='m-expired')ov.classList.remove('show')})});
+document.querySelectorAll('.ov').forEach(function(ov){ov.addEventListener('click',function(e){if(e.target===ov)ov.classList.remove('show')})});
 function flash(msg,type){
   var f=document.createElement('div');
   f.style.cssText='position:fixed;bottom:24px;right:24px;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.15);transition:.3s;opacity:0;transform:translateY(10px)';
@@ -687,127 +760,578 @@ function flash(msg,type){
   setTimeout(function(){f.style.opacity='0';setTimeout(function(){f.remove()},300)},2800);
 }
 
-/* ===== INVENTARIO ===== */
-var invData=[
-  {cod:'PRD-001',nom:'Laptop ProBook X5',cat:'Laptops',stock:24,min:10,precio:1200},
-  {cod:'PRD-002',nom:'Monitor UHD 27"',cat:'Monitores',stock:18,min:5,precio:700},
-  {cod:'PRD-003',nom:'Teclado Mecánico K80',cat:'Periféricos',stock:52,min:20,precio:150},
-  {cod:'PRD-004',nom:'Auriculares Pro',cat:'Audio',stock:3,min:10,precio:200},
-  {cod:'PRD-005',nom:'Mouse Inalámbrico',cat:'Periféricos',stock:41,min:15,precio:90},
-  {cod:'PRD-006',nom:'Router WiFi 6',cat:'Redes',stock:8,min:10,precio:180},
-  {cod:'PRD-007',nom:'SSD 1TB NVMe',cat:'Almacenamiento',stock:35,min:20,precio:120},
+/* ===========================
+   CAJA
+=========================== */
+var cajaBase=8000, cajaIngresos=0, cajaEgresos=0;
+var movimientos=[];
+function registrarMovimiento(desc, tipo, monto){
+  var now=new Date();
+  var hora=now.toLocaleTimeString('es-BO',{hour:'2-digit',minute:'2-digit'});
+  movimientos.push({hora:hora, desc:desc, tipo:tipo, monto:monto});
+  if(tipo==='ingreso') cajaIngresos+=monto;
+  else cajaEgresos+=monto;
+  actualizarCaja();
+}
+function actualizarCaja(){
+  var saldo=cajaBase+cajaIngresos-cajaEgresos;
+  var fmt=function(n){return'$'+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')};
+  var el=function(id){return document.getElementById(id)};
+  if(el('saldo-caja'))el('saldo-caja').textContent=fmt(saldo);
+  if(el('caja-ing'))el('caja-ing').textContent=fmt(cajaIngresos);
+  if(el('caja-egr'))el('caja-egr').textContent=fmt(cajaEgresos);
+  if(el('caja-ing2'))el('caja-ing2').textContent='+'+fmt(cajaIngresos);
+  if(el('caja-egr2'))el('caja-egr2').textContent='-'+fmt(cajaEgresos);
+  if(el('caja-saldo2'))el('caja-saldo2').textContent=fmt(saldo);
+  // Tabla movimientos
+  var tb=el('mov-tabla');
+  if(tb){
+    var rows='<tr><th>Hora</th><th>Descripción</th><th>Tipo</th><th>Monto</th></tr>';
+    movimientos.slice().reverse().forEach(function(m){
+      rows+='<tr><td>'+m.hora+'</td><td>'+m.desc+'</td><td><span class="badge '+(m.tipo==='ingreso'?'bg':'br')+'">'+(m.tipo==='ingreso'?'Ingreso':'Egreso')+'</span></td><td style="color:'+(m.tipo==='ingreso'?'var(--green)':'var(--red)')+'">'+(m.tipo==='ingreso'?'+':'-')+fmt(m.monto)+'</td></tr>';
+    });
+    if(!movimientos.length) rows+='<tr><td colspan="4" style="text-align:center;color:var(--tx2);padding:14px">Sin movimientos hoy</td></tr>';
+    tb.innerHTML=rows;
+  }
+}
+actualizarCaja();
+
+/* ===========================
+   CXC - datos dinámicos
+=========================== */
+var cxcData=[
+  {cli:'TechCorp SA',fac:'#FAC-2046',monto:9605,venc:'22/05/2026',dias:-8,estado:'Vencida'},
+  {cli:'InnoSoft Ltda',fac:'#FAC-2045',monto:2147,venc:'05/06/2026',dias:6,estado:'Por vencer'},
+  {cli:'MegaStore',fac:'#FAC-2043',monto:7684,venc:'15/06/2026',dias:16,estado:'Crédito'},
 ];
+var cobradoHoy=0;
+function actualizarKpiCXC(){
+  var total=cxcData.reduce(function(a,c){return a+c.monto},0);
+  var vencidas=cxcData.filter(function(c){return c.estado==='Vencida'});
+  var pVencer=cxcData.filter(function(c){return c.estado==='Por vencer'});
+  var fmt=function(n){return'$'+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')};
+  var el=function(id){return document.getElementById(id)};
+  if(el('cxc-total'))el('cxc-total').textContent=fmt(total);
+  if(el('cxc-pvencer'))el('cxc-pvencer').textContent=fmt(pVencer.reduce(function(a,c){return a+c.monto},0));
+  if(el('cxc-vencidas'))el('cxc-vencidas').textContent=fmt(vencidas.reduce(function(a,c){return a+c.monto},0));
+  if(el('cxc-cobrado'))el('cxc-cobrado').textContent=fmt(cobradoHoy);
+  // Dashboard KPI
+  if(el('kpi-cxc'))el('kpi-cxc').textContent=fmt(total);
+  if(el('kpi-cxc-venc'))el('kpi-cxc-venc').innerHTML='<i class="ti ti-alert-circle"></i>'+vencidas.length+' vencidas';
+}
+function renderCXC(){
+  var tb=document.getElementById('cxc-tbody');if(!tb)return;
+  tb.innerHTML=cxcData.map(function(c,i){
+    var dc=c.dias<0?'var(--red)':c.dias<10?'var(--amber)':'var(--tx)',be=c.estado==='Vencida'?'br':c.estado==='Por vencer'?'ba':'bb';
+    return '<tr><td>'+c.cli+'</td><td style="font-family:monospace">'+c.fac+'</td><td style="font-weight:600">$'+c.monto.toLocaleString()+'</td><td>'+c.venc+'</td><td style="color:'+dc+';font-weight:600">'+c.dias+'</td><td><span class="badge '+be+'">'+c.estado+'</span></td><td>'+(c.estado==='Vencida'?'<button class="btn btn-sm btn-p" onclick="abrirPago('+i+')"><i class="ti ti-cash"></i> Registrar Pago</button>':'<button class="btn btn-sm btn-o" onclick="flash(\'Aviso enviado a '+c.cli+'\',\'ok\')"><i class="ti ti-send"></i> Enviar aviso</button>')+'</td></tr>';
+  }).join('');
+  actualizarKpiCXC();
+}
+function abrirPago(i){
+  var c=cxcData[i];
+  document.getElementById('pago-info').innerHTML='<strong>'+c.cli+'</strong> · '+c.fac+'<br>Saldo: <strong style="color:var(--red)">$'+c.monto.toLocaleString()+'</strong>';
+  document.getElementById('pg-monto').value=c.monto;
+  document.getElementById('pg-fecha').value=new Date().toISOString().split('T')[0];
+  document.getElementById('pg-fecha').dataset.idx=i;
+  openModal('m-pago-cxc');
+}
+function confirmarPago(){
+  var idx=parseInt(document.getElementById('pg-fecha').dataset.idx);
+  var monto=parseFloat(document.getElementById('pg-monto').value)||0;
+  if(!monto){flash('Ingresa el monto','err');return;}
+  var resto=cxcData[idx].monto-monto;
+  cobradoHoy+=monto;
+  registrarMovimiento('Cobro '+cxcData[idx].fac+' — '+cxcData[idx].cli,'ingreso',monto);
+  if(resto<=0)cxcData.splice(idx,1);
+  else cxcData[idx].monto=parseFloat(resto.toFixed(2));
+  closeModal('m-pago-cxc');renderCXC();flash('Pago de $'+monto.toFixed(2)+' registrado','ok');
+}
+renderCXC();
+
+/* ===========================
+   INVENTARIO (precio costo + venta)
+=========================== */
+var invData=[
+  {cod:'PRD-001',nom:'Laptop ProBook X5',cat:'Laptops',stock:24,min:10,costo:950,venta:1200},
+  {cod:'PRD-002',nom:'Monitor UHD 27"',cat:'Monitores',stock:18,min:5,costo:480,venta:700},
+  {cod:'PRD-003',nom:'Teclado Mecánico K80',cat:'Periféricos',stock:52,min:20,costo:90,venta:150},
+  {cod:'PRD-004',nom:'Auriculares Pro',cat:'Audio',stock:3,min:10,costo:120,venta:200},
+  {cod:'PRD-005',nom:'Mouse Inalámbrico',cat:'Periféricos',stock:41,min:15,costo:50,venta:90},
+  {cod:'PRD-006',nom:'Router WiFi 6',cat:'Redes',stock:8,min:10,costo:110,venta:180},
+  {cod:'PRD-007',nom:'SSD 1TB NVMe',cat:'Almacenamiento',stock:35,min:20,costo:75,venta:120},
+];
+function calcMargenNuevo(){
+  var c=parseFloat(document.getElementById('ni-costo').value)||0;
+  var v=parseFloat(document.getElementById('ni-venta').value)||0;
+  var el=document.getElementById('ni-margen-info');
+  if(!c||!v){el.textContent='Ingresa costo y precio de venta para ver el margen.';return;}
+  var m=((v-c)/c*100).toFixed(1);
+  var u=(v-c).toFixed(2);
+  el.innerHTML='<span style="color:var(--green);font-weight:600">Margen: '+m+'% · Utilidad por unidad: $'+u+'</span>';
+}
+function calcMargenEditar(){
+  var c=parseFloat(document.getElementById('ei-costo').value)||0;
+  var v=parseFloat(document.getElementById('ei-venta').value)||0;
+  var el=document.getElementById('ei-margen-info');
+  if(!c||!v){el.textContent='';return;}
+  var m=((v-c)/c*100).toFixed(1);
+  var u=(v-c).toFixed(2);
+  el.innerHTML='<span style="color:var(--green);font-weight:600">Margen: '+m+'% · Utilidad por unidad: $'+u+'</span>';
+}
 function badgeInv(p){if(p.stock<p.min)return['br','Bajo stock'];if(p.stock<p.min*2)return['ba','Mínimo'];return['bg','Normal'];}
 function renderInv(filter){
   var tb=document.getElementById('inv-tbody');if(!tb)return;
   var list=filter?invData.filter(function(p){return p.nom.toLowerCase().includes(filter.toLowerCase())||p.cod.toLowerCase().includes(filter.toLowerCase())}):invData;
-  if(!list.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--tx2);padding:20px">Sin resultados</td></tr>';return;}
+  if(!list.length){tb.innerHTML='<tr><td colspan="10" style="text-align:center;color:var(--tx2);padding:20px">Sin resultados</td></tr>';return;}
   tb.innerHTML=list.map(function(p){
     var b=badgeInv(p),pct=Math.min(100,Math.round(p.stock/Math.max(p.min*3,1)*100));
     var fc=p.stock<p.min?'var(--red)':p.stock<p.min*2?'var(--amber)':'var(--green)';
+    var margen=p.costo>0?((p.venta-p.costo)/p.costo*100).toFixed(0)+'%':'—';
     var ri=invData.indexOf(p);
     return '<tr><td style="font-family:monospace;font-size:12px">'+p.cod+'</td><td style="font-weight:500">'+p.nom+'</td><td><span class="badge bb">'+p.cat+'</span></td>'+
       '<td><span style="font-weight:600">'+p.stock+'</span><div class="stock-bar"><div class="stock-fill" style="width:'+pct+'%;background:'+fc+'"></div></div></td>'+
-      '<td>'+p.min+'</td><td>$'+p.precio.toFixed(2)+'</td>'+
+      '<td>'+p.min+'</td>'+
+      '<td style="color:var(--tx2)">$'+p.costo.toFixed(2)+'</td>'+
+      '<td style="font-weight:600;color:var(--blue)">$'+p.venta.toFixed(2)+'</td>'+
+      '<td><span class="badge bg">'+margen+'</span></td>'+
       '<td><span class="badge '+b[0]+'">'+b[1]+'</span></td>'+
       '<td><button class="btn btn-sm btn-o" onclick="editarProducto('+ri+')"><i class="ti ti-edit"></i> Editar</button></td></tr>';
   }).join('');
+  // Actualizar badge de alertas
+  var bajos=invData.filter(function(p){return p.stock<p.min}).length;
+  var nb=document.getElementById('nb-inv');if(nb)nb.textContent=bajos;
+  actualizarAlertas();
 }
 function filterInv(){renderInv(document.getElementById('inv-search').value)}
-function editarProducto(idx){var p=invData[idx];document.getElementById('ei-cod').value=p.cod;document.getElementById('ei-nom').value=p.nom;document.getElementById('ei-cat').value=p.cat;document.getElementById('ei-precio').value=p.precio;document.getElementById('ei-stock').value=p.stock;document.getElementById('ei-min').value=p.min;document.getElementById('ei-idx').value=idx;openModal('m-inv-editar');}
-function actualizarProducto(){var idx=parseInt(document.getElementById('ei-idx').value);invData[idx].nom=document.getElementById('ei-nom').value;invData[idx].cat=document.getElementById('ei-cat').value;invData[idx].precio=parseFloat(document.getElementById('ei-precio').value)||0;invData[idx].stock=parseInt(document.getElementById('ei-stock').value)||0;invData[idx].min=parseInt(document.getElementById('ei-min').value)||0;closeModal('m-inv-editar');renderInv();syncPOSData();flash('Producto actualizado','ok');}
-function eliminarProducto(){var idx=parseInt(document.getElementById('ei-idx').value);if(confirm('¿Eliminar '+invData[idx].nom+'?')){invData.splice(idx,1);closeModal('m-inv-editar');renderInv();syncPOSData();flash('Producto eliminado','ok');}}
-function guardarProducto(){var nom=document.getElementById('ni-nom').value.trim(),cod=document.getElementById('ni-cod').value.trim();if(!nom||!cod){flash('Nombre y código son obligatorios','err');return;}invData.push({cod:cod,nom:nom,cat:document.getElementById('ni-cat').value,precio:parseFloat(document.getElementById('ni-precio').value)||0,stock:parseInt(document.getElementById('ni-stock').value)||0,min:parseInt(document.getElementById('ni-min').value)||0});closeModal('m-inv-nuevo');document.getElementById('ni-cod').value='';document.getElementById('ni-nom').value='';document.getElementById('ni-precio').value='';document.getElementById('ni-stock').value='';document.getElementById('ni-min').value='';renderInv();syncPOSData();flash('Producto creado correctamente','ok');}
+function editarProducto(idx){
+  var p=invData[idx];
+  document.getElementById('ei-cod').value=p.cod;
+  document.getElementById('ei-nom').value=p.nom;
+  document.getElementById('ei-cat').value=p.cat;
+  document.getElementById('ei-costo').value=p.costo;
+  document.getElementById('ei-venta').value=p.venta;
+  document.getElementById('ei-stock').value=p.stock;
+  document.getElementById('ei-min').value=p.min;
+  document.getElementById('ei-idx').value=idx;
+  calcMargenEditar();
+  openModal('m-inv-editar');
+}
+function actualizarProducto(){
+  var idx=parseInt(document.getElementById('ei-idx').value);
+  invData[idx].nom=document.getElementById('ei-nom').value;
+  invData[idx].cat=document.getElementById('ei-cat').value;
+  invData[idx].costo=parseFloat(document.getElementById('ei-costo').value)||0;
+  invData[idx].venta=parseFloat(document.getElementById('ei-venta').value)||0;
+  invData[idx].stock=parseInt(document.getElementById('ei-stock').value)||0;
+  invData[idx].min=parseInt(document.getElementById('ei-min').value)||0;
+  closeModal('m-inv-editar');renderInv();syncPOSData();flash('Producto actualizado','ok');
+}
+function eliminarProducto(){
+  var idx=parseInt(document.getElementById('ei-idx').value);
+  if(confirm('¿Eliminar '+invData[idx].nom+'?')){invData.splice(idx,1);closeModal('m-inv-editar');renderInv();syncPOSData();flash('Producto eliminado','ok');}
+}
+function guardarProducto(){
+  var nom=document.getElementById('ni-nom').value.trim(),cod=document.getElementById('ni-cod').value.trim();
+  if(!nom||!cod){flash('Nombre y código son obligatorios','err');return;}
+  invData.push({cod:cod,nom:nom,cat:document.getElementById('ni-cat').value,
+    costo:parseFloat(document.getElementById('ni-costo').value)||0,
+    venta:parseFloat(document.getElementById('ni-venta').value)||0,
+    stock:parseInt(document.getElementById('ni-stock').value)||0,
+    min:parseInt(document.getElementById('ni-min').value)||0});
+  closeModal('m-inv-nuevo');
+  ['ni-cod','ni-nom','ni-costo','ni-venta','ni-stock','ni-min'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('ni-margen-info').textContent='Ingresa costo y precio de venta para ver el margen.';
+  renderInv();syncPOSData();flash('Producto creado correctamente','ok');
+}
 renderInv();
 
-/* ===== COMPRAS ===== */
-var comprasData=[{num:'#OC-092',prov:'TechDistrib SA',fecha:'30/05/2026',items:12,total:14800,estado:'Pendiente'},{num:'#OC-091',prov:'DataTech Ltda',fecha:'29/05/2026',items:5,total:6300,estado:'En tránsito'},{num:'#OC-090',prov:'InnovaComp',fecha:'27/05/2026',items:20,total:31200,estado:'Recibido'},{num:'#OC-089',prov:'GlobalTech',fecha:'25/05/2026',items:8,total:9750,estado:'Recibido'},{num:'#OC-088',prov:'TechDistrib SA',fecha:'22/05/2026',items:15,total:22100,estado:'Cancelado'}];
+/* ===========================
+   ALERTAS DINÁMICAS EN DASHBOARD
+=========================== */
+var totalVentas=0, totalUtilidad=0;
+function actualizarAlertas(){
+  var alertas=[];
+  invData.forEach(function(p){
+    if(p.stock<p.min)alertas.push({tipo:'ar',icon:'ti-package',msg:'Stock crítico: '+p.nom+' ('+p.stock+' unid.)'});
+    else if(p.stock<p.min*2)alertas.push({tipo:'aw',icon:'ti-package',msg:'Stock bajo: '+p.nom+' ('+p.stock+' unid.)'});
+  });
+  cxcData.filter(function(c){return c.estado==='Vencida'}).forEach(function(c){
+    alertas.push({tipo:'ar',icon:'ti-credit-card',msg:'Factura vencida: '+c.fac+' — '+c.cli});
+  });
+  if(alertas.length===0)alertas.push({tipo:'ai',icon:'ti-check',msg:'Sin alertas pendientes. ¡Todo en orden!'});
+  var cont=document.getElementById('dash-alerts');
+  var cnt=document.getElementById('alert-count');
+  if(cont)cont.innerHTML=alertas.map(function(a){return'<div class="alert '+a.tipo+'"><i class="ti '+a.icon+'" style="font-size:16px;flex-shrink:0"></i>'+a.msg+'</div>'}).join('');
+  if(cnt)cnt.textContent=alertas.filter(function(a){return a.tipo!=='ai'}).length;
+  // KPIs ventas
+  var fmt=function(n){return'$'+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')};
+  var el=document.getElementById('kpi-ventas');if(el)el.textContent=fmt(totalVentas);
+  var eu=document.getElementById('kpi-utilidad');if(eu)eu.textContent=fmt(totalUtilidad);
+  // CRM ganados
+  var cg=document.getElementById('crm-cerrado');if(cg)cg.textContent=fmt(totalVentas)+' cerrado';
+}
+actualizarAlertas();
+
+/* ===========================
+   COMPRAS
+=========================== */
+var comprasData=[
+  {num:'#OC-092',prov:'TechDistrib SA',fecha:'30/05/2026',items:12,total:14800,estado:'Pendiente'},
+  {num:'#OC-091',prov:'DataTech Ltda',fecha:'29/05/2026',items:5,total:6300,estado:'En tránsito'},
+  {num:'#OC-090',prov:'InnovaComp',fecha:'27/05/2026',items:20,total:31200,estado:'Recibido'},
+  {num:'#OC-089',prov:'GlobalTech',fecha:'25/05/2026',items:8,total:9750,estado:'Recibido'},
+  {num:'#OC-088',prov:'TechDistrib SA',fecha:'22/05/2026',items:15,total:22100,estado:'Cancelado'},
+];
 function estadoBadgeC(e){return e==='Recibido'?'bg':e==='Pendiente'?'ba':e==='En tránsito'?'bb':'br'}
-function renderCompras(){var tb=document.getElementById('comp-tbody');if(!tb)return;tb.innerHTML=comprasData.map(function(c,i){return '<tr><td style="font-family:monospace">'+c.num+'</td><td>'+c.prov+'</td><td>'+c.fecha+'</td><td>'+c.items+'</td><td>$'+c.total.toLocaleString()+'</td><td><span class="badge '+estadoBadgeC(c.estado)+'">'+c.estado+'</span></td><td style="display:flex;gap:6px"><button class="btn btn-sm btn-o" onclick="verOrden('+i+')"><i class="ti ti-eye"></i> Ver</button>'+(c.estado==='Pendiente'?'<button class="btn btn-sm btn-g" onclick="aprobarOrden('+i+')"><i class="ti ti-check"></i> Aprobar</button>':'')+'</td></tr>';}).join('');}
-function guardarOrden(){var prov=document.getElementById('co-prov').value,total=parseFloat(document.getElementById('co-total').value)||0,items=parseInt(document.getElementById('co-items').value)||0,fecha=document.getElementById('co-fecha').value||new Date().toLocaleDateString('es-BO'),num=comprasData.length+89;comprasData.unshift({num:'#OC-0'+num,prov:prov,fecha:fecha,items:items,total:total,estado:'Pendiente'});closeModal('m-compra-nueva');renderCompras();flash('Orden de compra creada','ok');}
+function renderCompras(){
+  var tb=document.getElementById('comp-tbody');if(!tb)return;
+  tb.innerHTML=comprasData.map(function(c,i){
+    return '<tr><td style="font-family:monospace">'+c.num+'</td><td>'+c.prov+'</td><td>'+c.fecha+'</td><td>'+c.items+'</td><td>$'+c.total.toLocaleString()+'</td>'+
+      '<td><span class="badge '+estadoBadgeC(c.estado)+'">'+c.estado+'</span></td>'+
+      '<td style="display:flex;gap:6px"><button class="btn btn-sm btn-o" onclick="verOrden('+i+')"><i class="ti ti-eye"></i> Ver</button>'+
+      (c.estado==='Pendiente'?'<button class="btn btn-sm btn-g" onclick="aprobarOrden('+i+')"><i class="ti ti-check"></i> Aprobar</button>':'')+'</td></tr>';
+  }).join('');
+}
+function guardarOrden(){
+  var prov=document.getElementById('co-prov').value,total=parseFloat(document.getElementById('co-total').value)||0,items=parseInt(document.getElementById('co-items').value)||0,fecha=document.getElementById('co-fecha').value||new Date().toLocaleDateString('es-BO'),num=comprasData.length+89;
+  comprasData.unshift({num:'#OC-0'+num,prov:prov,fecha:fecha,items:items,total:total,estado:'Pendiente'});
+  closeModal('m-compra-nueva');renderCompras();flash('Orden de compra creada','ok');
+}
 function verOrden(i){flash('Orden '+comprasData[i].num+' — '+comprasData[i].prov+' — $'+comprasData[i].total.toLocaleString(),'ok')}
 function aprobarOrden(i){comprasData[i].estado='En tránsito';renderCompras();flash('Orden aprobada y enviada al proveedor','ok')}
 renderCompras();
 
-/* ===== VENTAS ===== */
-var ventasData=[{num:'#FAC-2047',cli:'Empresa Digital SRL',fecha:'30/05/2026',sub:4200,total:4746,estado:'Pagado'},{num:'#FAC-2046',cli:'TechCorp SA',fecha:'29/05/2026',sub:8500,total:9605,estado:'Vencido'},{num:'#FAC-2045',cli:'InnoSoft Ltda',fecha:'28/05/2026',sub:1900,total:2147,estado:'Pendiente'},{num:'#FAC-2044',cli:'Comercial XYZ',fecha:'27/05/2026',sub:3100,total:3503,estado:'Pagado'},{num:'#FAC-2043',cli:'MegaStore',fecha:'26/05/2026',sub:6800,total:7684,estado:'Crédito'}];
+/* ===========================
+   VENTAS (con NIT comprador)
+=========================== */
+var ventasData=[
+  {num:'#FAC-2047',cli:'Empresa Digital SRL',nit:'4501234',fecha:'30/05/2026',sub:4200,total:4746,estado:'Pagado'},
+  {num:'#FAC-2046',cli:'TechCorp SA',nit:'8901234',fecha:'29/05/2026',sub:8500,total:9605,estado:'Vencido'},
+  {num:'#FAC-2045',cli:'InnoSoft Ltda',nit:'3201234',fecha:'28/05/2026',sub:1900,total:2147,estado:'Pendiente'},
+  {num:'#FAC-2044',cli:'Comercial XYZ',nit:'7801234',fecha:'27/05/2026',sub:3100,total:3503,estado:'Pagado'},
+  {num:'#FAC-2043',cli:'MegaStore',nit:'5601234',fecha:'26/05/2026',sub:6800,total:7684,estado:'Crédito'},
+];
 function estadoBadgeV(e){return e==='Pagado'?'bg':e==='Pendiente'?'ba':e==='Vencido'?'br':'bb'}
-function renderVentas(){var tb=document.getElementById('vent-tbody');if(!tb)return;tb.innerHTML=ventasData.map(function(v){var iva=(v.total-v.sub).toFixed(2);return '<tr><td style="font-family:monospace">'+v.num+'</td><td>'+v.cli+'</td><td>'+v.fecha+'</td><td>$'+v.sub.toLocaleString()+'</td><td>$'+iva+'</td><td style="font-weight:600">$'+v.total.toLocaleString()+'</td><td><span class="badge '+estadoBadgeV(v.estado)+'">'+v.estado+'</span></td><td><button class="btn btn-sm btn-o" onclick="flash(\'PDF generado para '+v.num+'\',\'ok\')"><i class="ti ti-file-pdf"></i> PDF</button></td></tr>';}).join('');}
-function calcFacIVA(){var s=parseFloat(document.getElementById('fv-sub').value)||0,iva=s*0.13,tot=s+iva;document.getElementById('fv-iva').value='$'+iva.toFixed(2);document.getElementById('fv-tot').value='$'+tot.toFixed(2);}
-function guardarVenta(){var cli=document.getElementById('fv-cli').value,sub=parseFloat(document.getElementById('fv-sub').value)||0;if(!sub){flash('Ingresa el subtotal','err');return;}var tot=sub*1.13,fecha=new Date().toLocaleDateString('es-BO',{day:'2-digit',month:'2-digit',year:'numeric'}),num='#FAC-'+(2047+ventasData.length+1),est=document.getElementById('fv-est').value;ventasData.unshift({num:num,cli:cli,fecha:fecha,sub:sub,total:parseFloat(tot.toFixed(2)),estado:est});closeModal('m-venta-nueva');renderVentas();flash('Factura '+num+' emitida','ok');}
+function renderVentas(){
+  var tb=document.getElementById('vent-tbody');if(!tb)return;
+  tb.innerHTML=ventasData.map(function(v){
+    var iva=(v.total-v.sub).toFixed(2);
+    return '<tr><td style="font-family:monospace">'+v.num+'</td><td>'+v.cli+'</td><td style="font-family:monospace;font-size:12px">'+v.nit+'</td><td>'+v.fecha+'</td><td>$'+v.sub.toLocaleString()+'</td><td>$'+iva+'</td><td style="font-weight:600">$'+v.total.toLocaleString()+'</td>'+
+      '<td><span class="badge '+estadoBadgeV(v.estado)+'">'+v.estado+'</span></td>'+
+      '<td><button class="btn btn-sm btn-o" onclick="flash(\'PDF generado para '+v.num+'\',\'ok\')"><i class="ti ti-file-pdf"></i> PDF</button></td></tr>';
+  }).join('');
+}
+function autoFillNIT(){
+  var sel=document.getElementById('fv-cli');
+  var parts=sel.value.split('|');
+  if(parts.length>1)document.getElementById('fv-nit').value=parts[1]==='CF'?'':parts[1];
+}
+function calcFacIVA(){
+  var s=parseFloat(document.getElementById('fv-sub').value)||0,iva=s*0.13,tot=s+iva;
+  document.getElementById('fv-iva').value='$'+iva.toFixed(2);
+  document.getElementById('fv-tot').value='$'+tot.toFixed(2);
+}
+function guardarVenta(){
+  var sel=document.getElementById('fv-cli');
+  var cliName=sel.options[sel.selectedIndex].text;
+  var nit=document.getElementById('fv-nit').value.trim()||'CF';
+  var sub=parseFloat(document.getElementById('fv-sub').value)||0;
+  if(!sub){flash('Ingresa el subtotal','err');return;}
+  var tot=sub*1.13,fecha=new Date().toLocaleDateString('es-BO',{day:'2-digit',month:'2-digit',year:'numeric'}),num='#FAC-'+(2047+ventasData.length+1),est=document.getElementById('fv-est').value;
+  ventasData.unshift({num:num,cli:cliName,nit:nit,fecha:fecha,sub:sub,total:parseFloat(tot.toFixed(2)),estado:est});
+  totalVentas+=parseFloat(tot.toFixed(2));
+  var utilEst=sub*0.25; totalUtilidad+=utilEst;
+  registrarMovimiento('Venta '+num+' — '+cliName,'ingreso',parseFloat(tot.toFixed(2)));
+  closeModal('m-venta-nueva');renderVentas();actualizarAlertas();flash('Factura '+num+' emitida','ok');
+}
 renderVentas();
 
-/* ===== CXC ===== */
-var cxcData=[{cli:'TechCorp SA',fac:'#FAC-2046',monto:9605,venc:'22/05/2026',dias:-8,estado:'Vencida'},{cli:'InnoSoft Ltda',fac:'#FAC-2045',monto:2147,venc:'05/06/2026',dias:6,estado:'Por vencer'},{cli:'MegaStore',fac:'#FAC-2043',monto:7684,venc:'15/06/2026',dias:16,estado:'Crédito'}];
-function renderCXC(){var tb=document.getElementById('cxc-tbody');if(!tb)return;tb.innerHTML=cxcData.map(function(c,i){var dc=c.dias<0?'var(--red)':c.dias<10?'var(--amber)':'var(--tx)',be=c.estado==='Vencida'?'br':c.estado==='Por vencer'?'ba':'bb';return '<tr><td>'+c.cli+'</td><td style="font-family:monospace">'+c.fac+'</td><td style="font-weight:600">$'+c.monto.toLocaleString()+'</td><td>'+c.venc+'</td><td style="color:'+dc+';font-weight:600">'+c.dias+'</td><td><span class="badge '+be+'">'+c.estado+'</span></td><td>'+(c.estado==='Vencida'?'<button class="btn btn-sm btn-p" onclick="abrirPago('+i+')"><i class="ti ti-cash"></i> Registrar Pago</button>':'<button class="btn btn-sm btn-o" onclick="flash(\'Aviso enviado a '+c.cli+'\',\'ok\')"><i class="ti ti-send"></i> Enviar aviso</button>')+'</td></tr>';}).join('');}
-function abrirPago(i){var c=cxcData[i];document.getElementById('pago-info').innerHTML='<strong>'+c.cli+'</strong> · '+c.fac+'<br>Saldo: <strong style="color:var(--red)">$'+c.monto.toLocaleString()+'</strong>';document.getElementById('pg-monto').value=c.monto;document.getElementById('pg-fecha').value=new Date().toISOString().split('T')[0];document.getElementById('pg-fecha').dataset.idx=i;openModal('m-pago-cxc');}
-function confirmarPago(){var idx=parseInt(document.getElementById('pg-fecha').dataset.idx),monto=parseFloat(document.getElementById('pg-monto').value)||0;if(!monto){flash('Ingresa el monto','err');return;}var resto=cxcData[idx].monto-monto;if(resto<=0)cxcData.splice(idx,1);else cxcData[idx].monto=parseFloat(resto.toFixed(2));closeModal('m-pago-cxc');renderCXC();flash('Pago de $'+monto.toFixed(2)+' registrado correctamente','ok');}
-renderCXC();
-
-/* ===== RRHH ===== */
-var empData=[{nom:'Ana García',cargo:'Gerente de Ventas',depto:'Comercial',fecha:'01/03/2022',asist:'Presente',salario:4200,estado:'Activo'},{nom:'Carlos Mendez',cargo:'Contador Senior',depto:'Finanzas',fecha:'15/06/2020',asist:'Presente',salario:3800,estado:'Activo'},{nom:'María López',cargo:'Diseñadora UX',depto:'Tecnología',fecha:'10/01/2023',asist:'Vacaciones',salario:3200,estado:'Activo'},{nom:'Jorge Rivera',cargo:'Almacenero',depto:'Logística',fecha:'20/09/2021',asist:'Presente',salario:1800,estado:'Activo'},{nom:'Sandra Flores',cargo:'Vendedora',depto:'Comercial',fecha:'05/02/2024',asist:'Ausente',salario:1600,estado:'Activo'}];
+/* ===========================
+   RRHH
+=========================== */
+var empData=[
+  {nom:'Ana García',cargo:'Gerente de Ventas',depto:'Comercial',fecha:'01/03/2022',asist:'Presente',salario:4200,estado:'Activo'},
+  {nom:'Carlos Mendez',cargo:'Contador Senior',depto:'Finanzas',fecha:'15/06/2020',asist:'Presente',salario:3800,estado:'Activo'},
+  {nom:'María López',cargo:'Diseñadora UX',depto:'Tecnología',fecha:'10/01/2023',asist:'Vacaciones',salario:3200,estado:'Activo'},
+  {nom:'Jorge Rivera',cargo:'Almacenero',depto:'Logística',fecha:'20/09/2021',asist:'Presente',salario:1800,estado:'Activo'},
+  {nom:'Sandra Flores',cargo:'Vendedora',depto:'Comercial',fecha:'05/02/2024',asist:'Ausente',salario:1600,estado:'Activo'},
+];
 function asistBadge(a){return a==='Presente'?'bg':a==='Vacaciones'?'ba':'br'}
-function renderEmp(){var tb=document.getElementById('emp-tbody');if(!tb)return;tb.innerHTML=empData.map(function(e,i){return '<tr><td style="font-weight:500">'+e.nom+'</td><td>'+e.cargo+'</td><td>'+e.depto+'</td><td>'+e.fecha+'</td><td><span class="badge '+asistBadge(e.asist)+'">'+e.asist+'</span></td><td>$'+e.salario.toLocaleString()+'</td><td><span class="badge '+(e.estado==='Activo'?'bg':'br')+'">'+e.estado+'</span></td><td><button class="btn btn-sm btn-o" onclick="editarEmp('+i+')"><i class="ti ti-edit"></i> Editar</button></td></tr>';}).join('');document.getElementById('emp-total').textContent=empData.length;document.getElementById('emp-activos').textContent=empData.filter(function(e){return e.asist==='Presente'}).length;document.getElementById('emp-planilla').textContent='$'+empData.reduce(function(a,e){return a+e.salario},0).toLocaleString();}
-function guardarEmpleado(){var nom=document.getElementById('ee-nom').value.trim();if(!nom){flash('Nombre obligatorio','err');return;}empData.push({nom:nom,cargo:document.getElementById('ee-cargo').value,depto:document.getElementById('ee-depto').value,fecha:document.getElementById('ee-fecha').value||new Date().toLocaleDateString('es-BO'),asist:'Presente',salario:parseFloat(document.getElementById('ee-salario').value)||0,estado:'Activo'});closeModal('m-nuevo-emp');renderEmp();flash('Empleado registrado','ok');}
-function editarEmp(i){var e=empData[i];document.getElementById('ede-nom').value=e.nom;document.getElementById('ede-cargo').value=e.cargo;document.getElementById('ede-depto').value=e.depto;document.getElementById('ede-asist').value=e.asist;document.getElementById('ede-sal').value=e.salario;document.getElementById('ede-est').value=e.estado;document.getElementById('ede-idx').value=i;openModal('m-editar-emp');}
-function actualizarEmpleado(){var i=parseInt(document.getElementById('ede-idx').value);empData[i].nom=document.getElementById('ede-nom').value;empData[i].cargo=document.getElementById('ede-cargo').value;empData[i].depto=document.getElementById('ede-depto').value;empData[i].asist=document.getElementById('ede-asist').value;empData[i].salario=parseFloat(document.getElementById('ede-sal').value)||0;empData[i].estado=document.getElementById('ede-est').value;closeModal('m-editar-emp');renderEmp();flash('Empleado actualizado','ok');}
-function eliminarEmpleado(){var i=parseInt(document.getElementById('ede-idx').value);if(confirm('¿Dar de baja a '+empData[i].nom+'?')){empData.splice(i,1);closeModal('m-editar-emp');renderEmp();flash('Empleado dado de baja','ok');}}
+function renderEmp(){
+  var tb=document.getElementById('emp-tbody');if(!tb)return;
+  tb.innerHTML=empData.map(function(e,i){
+    return '<tr><td style="font-weight:500">'+e.nom+'</td><td>'+e.cargo+'</td><td>'+e.depto+'</td><td>'+e.fecha+'</td>'+
+      '<td><span class="badge '+asistBadge(e.asist)+'">'+e.asist+'</span></td>'+
+      '<td>$'+e.salario.toLocaleString()+'</td>'+
+      '<td><span class="badge '+(e.estado==='Activo'?'bg':'br')+'">'+e.estado+'</span></td>'+
+      '<td><button class="btn btn-sm btn-o" onclick="editarEmp('+i+')"><i class="ti ti-edit"></i> Editar</button></td></tr>';
+  }).join('');
+  document.getElementById('emp-total').textContent=empData.length;
+  document.getElementById('emp-activos').textContent=empData.filter(function(e){return e.asist==='Presente'}).length;
+  document.getElementById('emp-vacaciones').textContent=empData.filter(function(e){return e.asist==='Vacaciones'}).length;
+  document.getElementById('emp-planilla').textContent='$'+empData.reduce(function(a,e){return a+e.salario},0).toLocaleString();
+}
+function guardarEmpleado(){
+  var nom=document.getElementById('ee-nom').value.trim();if(!nom){flash('Nombre obligatorio','err');return;}
+  empData.push({nom:nom,cargo:document.getElementById('ee-cargo').value,depto:document.getElementById('ee-depto').value,fecha:document.getElementById('ee-fecha').value||new Date().toLocaleDateString('es-BO'),asist:'Presente',salario:parseFloat(document.getElementById('ee-salario').value)||0,estado:'Activo'});
+  closeModal('m-nuevo-emp');renderEmp();flash('Empleado registrado','ok');
+}
+function editarEmp(i){
+  var e=empData[i];
+  ['ede-nom','ede-cargo','ede-depto','ede-asist','ede-est'].forEach(function(id,j){var keys=['nom','cargo','depto','asist','estado'];document.getElementById(id).value=e[keys[j]];});
+  document.getElementById('ede-sal').value=e.salario;document.getElementById('ede-idx').value=i;
+  openModal('m-editar-emp');
+}
+function actualizarEmpleado(){
+  var i=parseInt(document.getElementById('ede-idx').value);
+  empData[i].nom=document.getElementById('ede-nom').value;empData[i].cargo=document.getElementById('ede-cargo').value;empData[i].depto=document.getElementById('ede-depto').value;empData[i].asist=document.getElementById('ede-asist').value;empData[i].salario=parseFloat(document.getElementById('ede-sal').value)||0;empData[i].estado=document.getElementById('ede-est').value;
+  closeModal('m-editar-emp');renderEmp();flash('Empleado actualizado','ok');
+}
+function eliminarEmpleado(){
+  var i=parseInt(document.getElementById('ede-idx').value);
+  if(confirm('¿Dar de baja a '+empData[i].nom+'?')){empData.splice(i,1);closeModal('m-editar-emp');renderEmp();flash('Empleado dado de baja','ok');}
+}
 renderEmp();
 
-/* ===== USUARIOS ===== */
-var usrData=[{nom:'Admin Principal',email:'admin@nexo.com',rol:'Super Admin',suc:'Central',acceso:'Hoy 09:01',estado:'Activo'},{nom:'Ana García',email:'ana@nexo.com',rol:'Gerente',suc:'Central',acceso:'Hoy 09:15',estado:'Activo'},{nom:'Pedro Salinas',email:'pedro@nexo.com',rol:'Cajero',suc:'Sucursal Norte',acceso:'Hoy 08:48',estado:'Activo'},{nom:'Laura Vega',email:'laura@nexo.com',rol:'Vendedor',suc:'Central',acceso:'Ayer 18:32',estado:'Activo'},{nom:'José Torres',email:'jose@nexo.com',rol:'Contador',suc:'Central',acceso:'28/05 14:20',estado:'Inactivo'}];
+/* ===========================
+   USUARIOS
+=========================== */
+var usrData=[
+  {nom:'Admin Principal',email:'admin@nexo.com',rol:'Super Admin',suc:'Central',acceso:'Hoy 09:01',estado:'Activo'},
+  {nom:'Ana García',email:'ana@nexo.com',rol:'Gerente',suc:'Central',acceso:'Hoy 09:15',estado:'Activo'},
+  {nom:'Pedro Salinas',email:'pedro@nexo.com',rol:'Cajero',suc:'Sucursal Norte',acceso:'Hoy 08:48',estado:'Activo'},
+  {nom:'Laura Vega',email:'laura@nexo.com',rol:'Vendedor',suc:'Central',acceso:'Ayer 18:32',estado:'Activo'},
+  {nom:'José Torres',email:'jose@nexo.com',rol:'Contador',suc:'Central',acceso:'28/05 14:20',estado:'Inactivo'},
+];
 var rolBadge={'Super Admin':'br','Gerente':'bb','Cajero':'ba','Vendedor':'bb','Contador':'bp'};
-function renderUsr(){var tb=document.getElementById('usr-tbody');if(!tb)return;tb.innerHTML=usrData.map(function(u,i){return '<tr><td style="font-weight:500">'+u.nom+'</td><td style="color:var(--tx2)">'+u.email+'</td><td><span class="badge '+(rolBadge[u.rol]||'bb')+'">'+u.rol+'</span></td><td>'+u.suc+'</td><td style="color:var(--tx2)">'+u.acceso+'</td><td><span class="badge '+(u.estado==='Activo'?'bg':'br')+'">'+u.estado+'</span></td><td><button class="btn btn-sm btn-o" onclick="editarUser('+i+')"><i class="ti ti-edit"></i> Editar</button></td></tr>';}).join('');}
-function guardarUsuario(){var nom=document.getElementById('nu-nom').value.trim(),email=document.getElementById('nu-email').value.trim();if(!nom||!email){flash('Nombre y email son obligatorios','err');return;}usrData.push({nom:nom,email:email,rol:document.getElementById('nu-rol').value,suc:document.getElementById('nu-suc').value,acceso:'Nunca',estado:document.getElementById('nu-est').value});closeModal('m-nuevo-user');renderUsr();flash('Usuario creado correctamente','ok');}
-function editarUser(i){var u=usrData[i];document.getElementById('eu-nom').value=u.nom;document.getElementById('eu-email').value=u.email;document.getElementById('eu-rol').value=u.rol;document.getElementById('eu-suc').value=u.suc;document.getElementById('eu-est').value=u.estado;document.getElementById('eu-idx').value=i;openModal('m-editar-user');}
-function actualizarUsuario(){var i=parseInt(document.getElementById('eu-idx').value);usrData[i].nom=document.getElementById('eu-nom').value;usrData[i].email=document.getElementById('eu-email').value;usrData[i].rol=document.getElementById('eu-rol').value;usrData[i].suc=document.getElementById('eu-suc').value;usrData[i].estado=document.getElementById('eu-est').value;closeModal('m-editar-user');renderUsr();flash('Usuario actualizado','ok');}
-function eliminarUsuario(){var i=parseInt(document.getElementById('eu-idx').value);if(i===0){flash('No se puede eliminar el Super Admin','err');return;}if(confirm('¿Eliminar usuario '+usrData[i].nom+'?')){usrData.splice(i,1);closeModal('m-editar-user');renderUsr();flash('Usuario eliminado','ok');}}
+function renderUsr(){
+  var tb=document.getElementById('usr-tbody');if(!tb)return;
+  tb.innerHTML=usrData.map(function(u,i){
+    return '<tr><td style="font-weight:500">'+u.nom+'</td><td style="color:var(--tx2)">'+u.email+'</td><td><span class="badge '+(rolBadge[u.rol]||'bb')+'">'+u.rol+'</span></td><td>'+u.suc+'</td><td style="color:var(--tx2)">'+u.acceso+'</td><td><span class="badge '+(u.estado==='Activo'?'bg':'br')+'">'+u.estado+'</span></td><td><button class="btn btn-sm btn-o" onclick="editarUser('+i+')"><i class="ti ti-edit"></i> Editar</button></td></tr>';
+  }).join('');
+}
+function guardarUsuario(){
+  var nom=document.getElementById('nu-nom').value.trim(),email=document.getElementById('nu-email').value.trim();
+  if(!nom||!email){flash('Nombre y email son obligatorios','err');return;}
+  usrData.push({nom:nom,email:email,rol:document.getElementById('nu-rol').value,suc:document.getElementById('nu-suc').value,acceso:'Nunca',estado:document.getElementById('nu-est').value});
+  closeModal('m-nuevo-user');renderUsr();flash('Usuario creado correctamente','ok');
+}
+function editarUser(i){
+  var u=usrData[i];
+  document.getElementById('eu-nom').value=u.nom;document.getElementById('eu-email').value=u.email;document.getElementById('eu-rol').value=u.rol;document.getElementById('eu-suc').value=u.suc;document.getElementById('eu-est').value=u.estado;document.getElementById('eu-idx').value=i;
+  openModal('m-editar-user');
+}
+function actualizarUsuario(){
+  var i=parseInt(document.getElementById('eu-idx').value);
+  usrData[i].nom=document.getElementById('eu-nom').value;usrData[i].email=document.getElementById('eu-email').value;usrData[i].rol=document.getElementById('eu-rol').value;usrData[i].suc=document.getElementById('eu-suc').value;usrData[i].estado=document.getElementById('eu-est').value;
+  closeModal('m-editar-user');renderUsr();flash('Usuario actualizado','ok');
+}
+function eliminarUsuario(){
+  var i=parseInt(document.getElementById('eu-idx').value);
+  if(i===0){flash('No se puede eliminar el Super Admin','err');return;}
+  if(confirm('¿Eliminar usuario '+usrData[i].nom+'?')){usrData.splice(i,1);closeModal('m-editar-user');renderUsr();flash('Usuario eliminado','ok');}
+}
 renderUsr();
 
-/* ===== CRM ===== */
-var clientesData=[{nom:'Empresa Digital SRL',cont:'CEO: Roberto Castro',val:'$48,200',col:'#3b5bdb',ini:'ED'},{nom:'TechCorp SA',cont:'Dir: Claudia Nuñez',val:'$31,400',col:'#8b5cf6',ini:'TC'},{nom:'InnoSoft Ltda',cont:'CTO: Mario Pérez',val:'$22,800',col:'#10b981',ini:'IS'},{nom:'Comercial XYZ',cont:'Gcia: Laura Vidal',val:'$17,600',col:'#f59e0b',ini:'CX'},{nom:'MegaStore',cont:'Adm: Pedro Ruiz',val:'$14,300',col:'#ef4444',ini:'MS'}];
-function renderCRM(){var cl=document.getElementById('client-list');if(!cl)return;cl.innerHTML=clientesData.map(function(c){return '<div class="cc"><div class="cav2" style="background:'+c.col+'22;color:'+c.col+'">'+c.ini+'</div><div class="ci2"><div class="cn">'+c.nom+'</div><div class="co">'+c.cont+'</div></div><div class="cv"><div class="cam">'+c.val+'</div><span class="badge bg" style="font-size:10px">Activo</span></div></div>';}).join('');}
-function guardarCliente(){var nom=document.getElementById('nc-nom').value.trim();if(!nom){flash('Nombre obligatorio','err');return;}var ini=nom.split(' ').map(function(w){return w[0]}).join('').toUpperCase().slice(0,2),cols=['#3b5bdb','#8b5cf6','#10b981','#f59e0b','#14b8a6'];clientesData.push({nom:nom,cont:document.getElementById('nc-cont').value||'—',val:'$0',col:cols[clientesData.length%cols.length],ini:ini});closeModal('m-nuevo-cliente');renderCRM();flash('Cliente registrado','ok');}
+/* ===========================
+   CRM
+=========================== */
+var clientesData=[
+  {nom:'Empresa Digital SRL',cont:'CEO: Roberto Castro',val:'$48,200',col:'#3b5bdb',ini:'ED'},
+  {nom:'TechCorp SA',cont:'Dir: Claudia Nuñez',val:'$31,400',col:'#8b5cf6',ini:'TC'},
+  {nom:'InnoSoft Ltda',cont:'CTO: Mario Pérez',val:'$22,800',col:'#10b981',ini:'IS'},
+  {nom:'Comercial XYZ',cont:'Gcia: Laura Vidal',val:'$17,600',col:'#f59e0b',ini:'CX'},
+  {nom:'MegaStore',cont:'Adm: Pedro Ruiz',val:'$14,300',col:'#ef4444',ini:'MS'},
+];
+function renderCRM(){
+  var cl=document.getElementById('client-list');if(!cl)return;
+  cl.innerHTML=clientesData.map(function(c){
+    return '<div class="cc"><div class="cav2" style="background:'+c.col+'22;color:'+c.col+'">'+c.ini+'</div><div class="ci2"><div class="cn">'+c.nom+'</div><div class="co">'+c.cont+'</div></div><div class="cv"><div class="cam">'+c.val+'</div><span class="badge bg" style="font-size:10px">Activo</span></div></div>';
+  }).join('');
+}
+function guardarCliente(){
+  var nom=document.getElementById('nc-nom').value.trim();if(!nom){flash('Nombre obligatorio','err');return;}
+  var ini=nom.split(' ').map(function(w){return w[0]}).join('').toUpperCase().slice(0,2),cols=['#3b5bdb','#8b5cf6','#10b981','#f59e0b','#14b8a6'];
+  clientesData.push({nom:nom,cont:document.getElementById('nc-cont').value||'—',val:'$0',col:cols[clientesData.length%cols.length],ini:ini});
+  closeModal('m-nuevo-cliente');renderCRM();flash('Cliente registrado','ok');
+}
 renderCRM();
 
-/* ===== SCANNER ===== */
+/* ===========================
+   SCANNER / QR
+=========================== */
 function openScanner(){openModal('m-scanner');setTimeout(function(){var el=document.getElementById('barcode-input');if(el)el.focus()},200)}
 function openQR(){openModal('m-qr')}
-function buscarCodigo(){var cod=document.getElementById('barcode-input').value.trim().toUpperCase(),p=invData.find(function(x){return x.cod.toUpperCase()===cod}),res=document.getElementById('barcode-result');if(p){res.innerHTML='<div style="background:#d1fae5;border-radius:8px;padding:12px;margin-top:8px"><strong style="color:#065f46">✓ Producto encontrado</strong><br><span style="font-size:13px">'+p.nom+' — Stock: '+p.stock+' — $'+p.precio.toFixed(2)+'</span></div>';flash('Producto encontrado: '+p.nom,'ok');}else{res.innerHTML='<div style="background:#fee2e2;border-radius:8px;padding:12px;margin-top:8px"><strong style="color:#991b1b">✗ Código no encontrado</strong></div>';}}
-function simularQR(){var p=invData[Math.floor(Math.random()*invData.length)];document.getElementById('qr-result').innerHTML='<div style="background:#d1fae5;border-radius:8px;padding:12px;margin-top:8px"><strong style="color:#065f46">✓ QR leído: '+p.cod+'</strong><br><span style="font-size:13px">'+p.nom+' — $'+p.precio.toFixed(2)+'</span></div>';flash('QR escaneado: '+p.nom,'ok');}
-function buscarQR(){var cod=document.getElementById('qr-manual').value.trim().toUpperCase(),p=invData.find(function(x){return x.cod.toUpperCase()===cod}),res=document.getElementById('qr-result');if(p)res.innerHTML='<div style="background:#d1fae5;border-radius:8px;padding:12px;margin-top:8px"><strong style="color:#065f46">✓ '+p.nom+'</strong> — Stock: '+p.stock+' — $'+p.precio.toFixed(2)+'</div>';else res.innerHTML='<div style="background:#fee2e2;border-radius:8px;padding:12px;margin-top:8px"><strong style="color:#991b1b">✗ Código no encontrado</strong></div>';}
+function buscarCodigo(){
+  var cod=document.getElementById('barcode-input').value.trim().toUpperCase();
+  var p=invData.find(function(x){return x.cod.toUpperCase()===cod});
+  var res=document.getElementById('barcode-result');
+  if(p){res.innerHTML='<div style="background:#d1fae5;border-radius:8px;padding:12px;margin-top:8px"><strong style="color:#065f46">✓ Producto encontrado</strong><br><span style="font-size:13px">'+p.nom+' — Stock: '+p.stock+' — Venta: $'+p.venta.toFixed(2)+'</span></div>';flash('Producto encontrado: '+p.nom,'ok');}
+  else{res.innerHTML='<div style="background:#fee2e2;border-radius:8px;padding:12px;margin-top:8px"><strong style="color:#991b1b">✗ Código no encontrado</strong></div>';}
+}
+function simularQR(){
+  var p=invData[Math.floor(Math.random()*invData.length)];
+  document.getElementById('qr-result').innerHTML='<div style="background:#d1fae5;border-radius:8px;padding:12px;margin-top:8px"><strong style="color:#065f46">✓ QR leído: '+p.cod+'</strong><br><span style="font-size:13px">'+p.nom+' — $'+p.venta.toFixed(2)+'</span></div>';
+  flash('QR escaneado: '+p.nom,'ok');
+}
+function buscarQR(){
+  var cod=document.getElementById('qr-manual').value.trim().toUpperCase();
+  var p=invData.find(function(x){return x.cod.toUpperCase()===cod}),res=document.getElementById('qr-result');
+  if(p)res.innerHTML='<div style="background:#d1fae5;border-radius:8px;padding:12px;margin-top:8px"><strong style="color:#065f46">✓ '+p.nom+'</strong> — Stock: '+p.stock+' — $'+p.venta.toFixed(2)+'</div>';
+  else res.innerHTML='<div style="background:#fee2e2;border-radius:8px;padding:12px;margin-top:8px"><strong style="color:#991b1b">✗ Código no encontrado</strong></div>';
+}
 
-/* ===== POS ===== */
+/* ===========================
+   POS
+=========================== */
 var posProds=[],cart={},activeCat='Todos',payMethod='efectivo',lastSale=null,saleN=2048;
 function syncPOSData(){
-  posProds=invData.map(function(p,i){var cats={Laptops:{ic:'ti-device-laptop',bg:'#eff2ff',col:'#3b5bdb'},Monitores:{ic:'ti-device-desktop',bg:'#d1fae5',col:'#10b981'},Periféricos:{ic:'ti-keyboard',bg:'#fef3c7',col:'#f59e0b'},Audio:{ic:'ti-headphones',bg:'#fee2e2',col:'#ef4444'},Redes:{ic:'ti-wifi',bg:'#e0f2fe',col:'#0ea5e9'},Almacenamiento:{ic:'ti-database',bg:'#d1fae5',col:'#10b981'}};var c=cats[p.cat]||{ic:'ti-package',bg:'#f3f4f6',col:'#6b7280'};return{nom:p.nom,cat:p.cat,precio:p.precio,stock:p.stock,ic:c.ic,bg:c.bg,col:c.col,invIdx:i};});buildCats();renderPOS();
+  posProds=invData.map(function(p,i){
+    var cats={Laptops:{ic:'ti-device-laptop',bg:'#eff2ff',col:'#3b5bdb'},Monitores:{ic:'ti-device-desktop',bg:'#d1fae5',col:'#10b981'},Periféricos:{ic:'ti-keyboard',bg:'#fef3c7',col:'#f59e0b'},Audio:{ic:'ti-headphones',bg:'#fee2e2',col:'#ef4444'},Redes:{ic:'ti-wifi',bg:'#e0f2fe',col:'#0ea5e9'},Almacenamiento:{ic:'ti-database',bg:'#d1fae5',col:'#10b981'}};
+    var c=cats[p.cat]||{ic:'ti-package',bg:'#f3f4f6',col:'#6b7280'};
+    return{nom:p.nom,cat:p.cat,precio:p.venta,stock:p.stock,ic:c.ic,bg:c.bg,col:c.col,invIdx:i};
+  });
+  buildCats();renderPOS();
 }
-function buildCats(){var cats=['Todos'];posProds.forEach(function(p){if(cats.indexOf(p.cat)===-1)cats.push(p.cat)});var el=document.getElementById('pos-cats');if(!el)return;el.innerHTML=cats.map(function(c){return'<div class="pos-cat'+(c===activeCat?' active':'')+'" onclick="filterCat(this,\''+c+'\')">'+c+'</div>'}).join('');}
-function renderPOS(){var g=document.getElementById('pos-grid');if(!g)return;var sv=document.getElementById('pos-si')?document.getElementById('pos-si').value:'',html='';posProds.forEach(function(p,i){if(activeCat!=='Todos'&&p.cat!==activeCat)return;if(sv&&p.nom.toLowerCase().indexOf(sv.toLowerCase())===-1)return;var inC=cart[p.nom]?cart[p.nom].qty:0,low=p.stock<=5;html+='<div class="pos-prod" onclick="addCart('+i+')"><div class="pos-prod-icon" style="background:'+p.bg+'"><i class="ti '+p.ic+'" style="color:'+p.col+';font-size:22px"></i></div><div class="pos-prod-name">'+p.nom+'</div><div class="pos-prod-price">$'+p.precio.toFixed(2)+'</div><div class="pos-prod-stock" style="color:'+(low?'var(--red)':'var(--tx2)')+'">Stock: '+p.stock+(inC?' · <b style="color:var(--blue)">'+inC+' cart</b>':'')+'</div></div>';});if(!html)html='<div style="grid-column:1/-1;text-align:center;color:var(--tx2);padding:30px;font-size:13px">Sin resultados</div>';g.innerHTML=html;}
+function buildCats(){
+  var cats=['Todos'];posProds.forEach(function(p){if(cats.indexOf(p.cat)===-1)cats.push(p.cat)});
+  var el=document.getElementById('pos-cats');if(!el)return;
+  el.innerHTML=cats.map(function(c){return'<div class="pos-cat'+(c===activeCat?' active':'')+'" onclick="filterCat(this,\''+c+'\')">'+c+'</div>'}).join('');
+}
+function renderPOS(){
+  var g=document.getElementById('pos-grid');if(!g)return;
+  var sv=document.getElementById('pos-si')?document.getElementById('pos-si').value:'',html='';
+  posProds.forEach(function(p,i){
+    if(activeCat!=='Todos'&&p.cat!==activeCat)return;
+    if(sv&&p.nom.toLowerCase().indexOf(sv.toLowerCase())===-1)return;
+    var inC=cart[p.nom]?cart[p.nom].qty:0,low=p.stock<=5;
+    html+='<div class="pos-prod" onclick="addCart('+i+')"><div class="pos-prod-icon" style="background:'+p.bg+'"><i class="ti '+p.ic+'" style="color:'+p.col+';font-size:22px"></i></div><div class="pos-prod-name">'+p.nom+'</div><div class="pos-prod-price">$'+p.precio.toFixed(2)+'</div><div class="pos-prod-stock" style="color:'+(low?'var(--red)':'var(--tx2)')+'">Stock: '+p.stock+(inC?' · <b style="color:var(--blue)">'+inC+' cart</b>':'')+'</div></div>';
+  });
+  if(!html)html='<div style="grid-column:1/-1;text-align:center;color:var(--tx2);padding:30px;font-size:13px">Sin resultados</div>';
+  g.innerHTML=html;
+}
 function filterCat(el,cat){activeCat=cat;document.querySelectorAll('.pos-cat').forEach(function(c){c.classList.remove('active')});el.classList.add('active');var si=document.getElementById('pos-si');if(si)si.value='';renderPOS();}
-function addCart(i){var p=posProds[i];if(!cart[p.nom])cart[p.nom]={nom:p.nom,precio:p.precio,qty:0,idx:i};if(cart[p.nom].qty>=p.stock){flash('Sin stock suficiente','err');return;}cart[p.nom].qty++;renderCart();renderPOS();}
-function renderCart(){var el=document.getElementById('cart-items');if(!el)return;var keys=Object.keys(cart);if(!keys.length){el.innerHTML='<p style="text-align:center;color:var(--tx2);padding:20px;font-size:13px"><i class="ti ti-shopping-cart-off" style="font-size:24px;display:block;margin-bottom:6px"></i>Sin productos</p>';renderTotals();return;}el.innerHTML=keys.map(function(k){var c=cart[k];return'<div class="ci"><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--tx)">'+k+'</div><div style="font-size:11px;color:var(--tx2)">$'+c.precio.toFixed(2)+' c/u</div></div><div class="cqty"><button class="qbtn" onclick="changeQty(\''+k+'\',-1)">−</button><span style="font-size:13px;font-weight:700;min-width:22px;text-align:center;color:var(--tx)">'+c.qty+'</span><button class="qbtn" onclick="changeQty(\''+k+'\',1)">+</button></div><div style="font-size:13px;font-weight:700;min-width:54px;text-align:right;color:var(--tx)">$'+(c.precio*c.qty).toFixed(2)+'</div><button class="del-btn" onclick="delCartItem(\''+k+'\')"><i class="ti ti-x"></i></button></div>';}).join('');renderTotals();var cnt=keys.reduce(function(a,k){return a+cart[k].qty},0),cc=document.getElementById('cart-cnt');if(cc)cc.textContent='('+cnt+' item'+(cnt===1?'':'s')+')';}
-function renderTotals(){var keys=Object.keys(cart),sub=keys.reduce(function(a,k){return a+cart[k].precio*cart[k].qty},0),dp=parseFloat((document.getElementById('desc-i')||{value:'0'}).value)||0;dp=Math.max(0,Math.min(100,dp));var da=sub*(dp/100),sd=sub-da,iva=sd*0.13,tot=sd+iva;var s=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v};s('sub','$'+sub.toFixed(2));var dae=document.getElementById('desc-amt');if(dae)dae.textContent='-$'+da.toFixed(2);s('iva','$'+iva.toFixed(2));s('tot','$'+tot.toFixed(2));calcVuelto();updatePayBtn(tot);}
+function addCart(i){
+  var p=posProds[i];
+  if(!cart[p.nom])cart[p.nom]={nom:p.nom,precio:p.precio,qty:0,idx:i};
+  if(cart[p.nom].qty>=p.stock){flash('Sin stock suficiente','err');return;}
+  cart[p.nom].qty++;renderCart();renderPOS();
+}
+function renderCart(){
+  var el=document.getElementById('cart-items');if(!el)return;
+  var keys=Object.keys(cart);
+  if(!keys.length){el.innerHTML='<p style="text-align:center;color:var(--tx2);padding:20px;font-size:13px"><i class="ti ti-shopping-cart-off" style="font-size:24px;display:block;margin-bottom:6px"></i>Sin productos</p>';renderTotals();return;}
+  el.innerHTML=keys.map(function(k){var c=cart[k];return'<div class="ci"><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--tx)">'+k+'</div><div style="font-size:11px;color:var(--tx2)">$'+c.precio.toFixed(2)+' c/u</div></div><div class="cqty"><button class="qbtn" onclick="changeQty(\''+k+'\',-1)">−</button><span style="font-size:13px;font-weight:700;min-width:22px;text-align:center;color:var(--tx)">'+c.qty+'</span><button class="qbtn" onclick="changeQty(\''+k+'\',1)">+</button></div><div style="font-size:13px;font-weight:700;min-width:54px;text-align:right;color:var(--tx)">$'+(c.precio*c.qty).toFixed(2)+'</div><button class="del-btn" onclick="delCartItem(\''+k+'\')"><i class="ti ti-x"></i></button></div>';}).join('');
+  renderTotals();
+  var cnt=keys.reduce(function(a,k){return a+cart[k].qty},0),cc=document.getElementById('cart-cnt');if(cc)cc.textContent='('+cnt+' item'+(cnt===1?'':'s')+')';
+}
+function renderTotals(){
+  var keys=Object.keys(cart),sub=keys.reduce(function(a,k){return a+cart[k].precio*cart[k].qty},0);
+  var dp=parseFloat((document.getElementById('desc-i')||{value:'0'}).value)||0;dp=Math.max(0,Math.min(100,dp));
+  var da=sub*(dp/100),sd=sub-da,iva=sd*0.13,tot=sd+iva;
+  var s=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v};
+  s('sub','$'+sub.toFixed(2));var dae=document.getElementById('desc-amt');if(dae)dae.textContent='-$'+da.toFixed(2);
+  s('iva','$'+iva.toFixed(2));s('tot','$'+tot.toFixed(2));calcVuelto();updatePayBtn(tot);
+}
 function updatePayBtn(tot){var btn=document.getElementById('pay-btn');if(!btn)return;if(!Object.keys(cart).length){btn.disabled=true;return;}if(payMethod==='efectivo'){var rec=parseFloat((document.getElementById('rec-i')||{value:0}).value)||0;btn.disabled=rec<tot;}else btn.disabled=false;}
 function changeQty(k,d){if(!cart[k])return;var p=posProds[cart[k].idx];if(d>0&&cart[k].qty>=p.stock){flash('Sin stock suficiente','err');return;}cart[k].qty+=d;if(cart[k].qty<=0)delete cart[k];renderCart();renderPOS();}
 function delCartItem(k){delete cart[k];renderCart();renderPOS();}
 function clearCart(){cart={};renderCart();renderPOS();var ri=document.getElementById('rec-i');if(ri)ri.value='';calcVuelto();}
 function setMethod(el,m){payMethod=m;document.querySelectorAll('.pm').forEach(function(p){p.classList.remove('active')});el.classList.add('active');var es=document.getElementById('ef-sec');if(es)es.style.display=m==='efectivo'?'block':'none';renderTotals();}
-function calcVuelto(){var vb=document.getElementById('vuelto-box');if(!vb)return;if(payMethod!=='efectivo'){vb.style.display='none';return;}var totEl=document.getElementById('tot'),tot=totEl?parseFloat(totEl.textContent.replace('$','').replace(',',''))||0:0;if(tot===0){vb.style.display='none';updatePayBtn(0);return;}var rec=parseFloat((document.getElementById('rec-i')||{value:0}).value)||0;if(!rec){vb.style.display='none';updatePayBtn(tot);return;}vb.style.display='flex';var v=rec-tot;if(v>=0){vb.className='vuelto-box vuelto-ok';vb.innerHTML='<span>Vuelto a entregar</span><span>$'+v.toFixed(2)+'</span>';}else{vb.className='vuelto-box vuelto-err';vb.innerHTML='<span>Monto insuficiente</span><span>Faltan $'+Math.abs(v).toFixed(2)+'</span>';}updatePayBtn(tot);}
-function getTotals(){var keys=Object.keys(cart),sub=keys.reduce(function(a,k){return a+cart[k].precio*cart[k].qty},0),dp=parseFloat((document.getElementById('desc-i')||{value:'0'}).value)||0;dp=Math.max(0,Math.min(100,dp));var da=sub*(dp/100),sd=sub-da,iva=sd*0.13,tot=sd+iva;return{sub:sub,dp:dp,da:da,sd:sd,iva:iva,tot:tot};}
-function processPay(){var keys=Object.keys(cart);if(!keys.length)return;var t=getTotals(),rec=payMethod==='efectivo'?(parseFloat((document.getElementById('rec-i')||{value:0}).value)||0):t.tot,now=new Date();saleN++;lastSale={items:keys.map(function(k){return{nom:k,qty:cart[k].qty,precio:cart[k].precio,total:cart[k].precio*cart[k].qty}}),sub:t.sub,dp:t.dp,da:t.da,iva:t.iva,tot:t.tot,rec:rec,vuelto:rec-t.tot,fecha:now.toLocaleDateString('es-BO',{day:'2-digit',month:'2-digit',year:'numeric'}),hora:now.toLocaleTimeString('es-BO',{hour:'2-digit',minute:'2-digit'}),num:'#FAC-'+saleN,metodo:payMethod};buildRecibo();clearCart();flash('Venta registrada correctamente','ok');}
-function buildRecibo(){if(!lastSale)return;var s=lastSale,pl=s.metodo==='efectivo'?'Efectivo':s.metodo==='qr'?'QR / Transferencia':'Tarjeta';var compName=document.getElementById('sb-name').textContent;document.getElementById('recibo-title').innerHTML='<i class="ti ti-receipt" style="margin-right:6px"></i>Recibo '+s.num;var h='<div class="recibo-logo"><strong>'+compName+'</strong><span>'+s.fecha+' '+s.hora+' · '+s.num+'</span></div><hr class="rsep"><table><thead><tr><td><b>Producto</b></td><td style="text-align:center"><b>Cant</b></td><td style="text-align:right"><b>P.U.</b></td><td style="text-align:right"><b>Total</b></td></tr></thead><tbody>';s.items.forEach(function(it){h+='<tr><td>'+it.nom+'</td><td style="text-align:center">'+it.qty+'</td><td style="text-align:right">$'+it.precio.toFixed(2)+'</td><td style="text-align:right">$'+it.total.toFixed(2)+'</td></tr>'});h+='</tbody></table><hr class="rsep"><table><tr><td>Subtotal</td><td>$'+s.sub.toFixed(2)+'</td></tr>';if(s.dp>0)h+='<tr><td>Descuento ('+s.dp+'%)</td><td style="color:#ef4444">-$'+s.da.toFixed(2)+'</td></tr>';h+='<tr><td>IVA (13%)</td><td>$'+s.iva.toFixed(2)+'</td></tr><tr class="recibo-grand"><td>TOTAL</td><td>$'+s.tot.toFixed(2)+'</td></tr></table><hr class="rsep"><table><tr><td>Pago</td><td><b>'+pl+'</b></td></tr>';if(s.metodo==='efectivo'){h+='<tr><td>Recibido</td><td>$'+s.rec.toFixed(2)+'</td></tr></table><div class="rvuelto"><span>VUELTO</span><span>$'+s.vuelto.toFixed(2)+'</span></div>';}else h+='</table>';h+='<div class="rfooter">¡Gracias por su compra! · '+compName+'</div>';document.getElementById('recibo-content').innerHTML=h;openModal('m-recibo');}
-function showFacturaPOS(){if(!lastSale)return;var s=lastSale,pl=s.metodo==='efectivo'?'Efectivo':s.metodo==='qr'?'QR / Transferencia':'Tarjeta',compName=document.getElementById('sb-name').textContent;document.getElementById('recibo-title').innerHTML='<i class="ti ti-file-invoice" style="margin-right:6px"></i>Factura '+s.num;var h='<div style="border:2px solid #1a1f2e;border-radius:6px;padding:14px;margin-bottom:10px;font-size:12px"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><div><b style="font-size:14px">'+compName+'</b><br><span style="color:#666">NIT: 1234567890 · Trinidad, Bolivia</span></div><div style="text-align:right"><span style="background:#1a1f2e;color:#fff;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:700">FACTURA</span><br><span style="color:#666">'+s.num+'</span></div></div>';h+='<div style="background:#f8fafc;padding:8px;border-radius:4px;display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11px;margin-bottom:10px"><div><b>Fecha:</b> '+s.fecha+'</div><div><b>Hora:</b> '+s.hora+'</div><div><b>Cliente:</b> Consumidor Final</div><div><b>NIT:</b> C/F</div></div><table style="width:100%;border-collapse:collapse;font-size:11px"><thead style="background:#1a1f2e;color:#fff"><tr><td style="padding:5px 6px">Descripción</td><td style="padding:5px 6px;text-align:center">Cant</td><td style="padding:5px 6px;text-align:right">P.U.</td><td style="padding:5px 6px;text-align:right">Importe</td></tr></thead><tbody>';s.items.forEach(function(it,idx){h+='<tr style="background:'+(idx%2?'#f8fafc':'#fff')+'"><td style="padding:5px 6px">'+it.nom+'</td><td style="padding:5px 6px;text-align:center">'+it.qty+'</td><td style="padding:5px 6px;text-align:right">$'+it.precio.toFixed(2)+'</td><td style="padding:5px 6px;text-align:right">$'+it.total.toFixed(2)+'</td></tr>'});h+='</tbody></table><table style="width:100%;font-size:12px;border-top:2px solid #1a1f2e;margin-top:4px"><tr><td style="padding:3px 6px">Subtotal</td><td style="text-align:right;padding:3px 6px">$'+s.sub.toFixed(2)+'</td></tr>';if(s.dp>0)h+='<tr><td style="color:#ef4444;padding:3px 6px">Descuento ('+s.dp+'%)</td><td style="text-align:right;color:#ef4444;padding:3px 6px">-$'+s.da.toFixed(2)+'</td></tr>';h+='<tr><td style="padding:3px 6px">IVA (13%)</td><td style="text-align:right;padding:3px 6px">$'+s.iva.toFixed(2)+'</td></tr><tr style="background:#1a1f2e;color:#fff"><td style="padding:6px;font-size:13px;font-weight:700">TOTAL</td><td style="text-align:right;padding:6px;font-size:13px;font-weight:700">$'+s.tot.toFixed(2)+'</td></tr>';if(s.metodo==='efectivo')h+='<tr><td style="color:#10b981;font-weight:600;padding:3px 6px">Vuelto</td><td style="color:#10b981;font-weight:600;text-align:right;padding:3px 6px">$'+s.vuelto.toFixed(2)+'</td></tr>';h+='<tr><td colspan="2" style="color:#666;font-size:11px;padding:3px 6px">Pago: <b>'+pl+'</b></td></tr></table><div style="text-align:center;font-size:10px;color:#999;margin-top:8px;border-top:1px dashed #ccc;padding-top:6px">Documento legal · '+compName+' · Conserve este comprobante</div></div>';document.getElementById('recibo-content').innerHTML=h;}
+function calcVuelto(){
+  var vb=document.getElementById('vuelto-box');if(!vb)return;
+  if(payMethod!=='efectivo'){vb.style.display='none';return;}
+  var totEl=document.getElementById('tot'),tot=totEl?parseFloat(totEl.textContent.replace('$','').replace(',',''))||0:0;
+  if(tot===0){vb.style.display='none';updatePayBtn(0);return;}
+  var rec=parseFloat((document.getElementById('rec-i')||{value:0}).value)||0;
+  if(!rec){vb.style.display='none';updatePayBtn(tot);return;}
+  vb.style.display='flex';var v=rec-tot;
+  if(v>=0){vb.className='vuelto-box vuelto-ok';vb.innerHTML='<span>Vuelto a entregar</span><span>$'+v.toFixed(2)+'</span>';}
+  else{vb.className='vuelto-box vuelto-err';vb.innerHTML='<span>Monto insuficiente</span><span>Faltan $'+Math.abs(v).toFixed(2)+'</span>';}
+  updatePayBtn(tot);
+}
+function getTotals(){
+  var keys=Object.keys(cart),sub=keys.reduce(function(a,k){return a+cart[k].precio*cart[k].qty},0);
+  var dp=parseFloat((document.getElementById('desc-i')||{value:'0'}).value)||0;dp=Math.max(0,Math.min(100,dp));
+  var da=sub*(dp/100),sd=sub-da,iva=sd*0.13,tot=sd+iva;
+  return{sub:sub,dp:dp,da:da,sd:sd,iva:iva,tot:tot};
+}
+function processPay(){
+  var keys=Object.keys(cart);if(!keys.length)return;
+  var t=getTotals(),rec=payMethod==='efectivo'?(parseFloat((document.getElementById('rec-i')||{value:0}).value)||0):t.tot;
+  var now=new Date();saleN++;
+  lastSale={items:keys.map(function(k){return{nom:k,qty:cart[k].qty,precio:cart[k].precio,total:cart[k].precio*cart[k].qty}}),
+    sub:t.sub,dp:t.dp,da:t.da,iva:t.iva,tot:t.tot,rec:rec,vuelto:rec-t.tot,
+    fecha:now.toLocaleDateString('es-BO',{day:'2-digit',month:'2-digit',year:'numeric'}),
+    hora:now.toLocaleTimeString('es-BO',{hour:'2-digit',minute:'2-digit'}),
+    num:'#FAC-'+saleN,metodo:payMethod,nit:'CF'};
+  // Actualizar stock
+  keys.forEach(function(k){var c=cart[k];var p=posProds[c.idx];if(p)invData[p.invIdx].stock=Math.max(0,invData[p.invIdx].stock-c.qty);});
+  totalVentas+=t.tot; totalUtilidad+=t.sd*0.25;
+  registrarMovimiento('Venta POS '+lastSale.num,'ingreso',t.tot);
+  // Agregar a ventas
+  ventasData.unshift({num:lastSale.num,cli:'Consumidor Final',nit:'CF',fecha:lastSale.fecha,sub:t.sub,total:parseFloat(t.tot.toFixed(2)),estado:'Pagado'});
+  renderVentas();renderInv();syncPOSData();actualizarAlertas();
+  document.getElementById('recibo-nit').value='';
+  buildRecibo();clearCart();flash('Venta registrada correctamente','ok');
+}
+function buildRecibo(){
+  if(!lastSale)return;
+  var s=lastSale,pl=s.metodo==='efectivo'?'Efectivo':s.metodo==='qr'?'QR / Transferencia':'Tarjeta';
+  var nitVal=document.getElementById('recibo-nit')?document.getElementById('recibo-nit').value.trim()||'CF':'CF';
+  s.nit=nitVal;
+  document.getElementById('recibo-title').innerHTML='<i class="ti ti-receipt" style="margin-right:6px"></i>Recibo '+s.num;
+  var h='<div class="recibo-logo"><strong>'+empresa.nombre+'</strong><span>NIT Empresa: '+empresa.nit+' · '+empresa.dir+'</span><span>'+s.fecha+' '+s.hora+' · '+s.num+'</span></div><hr class="rsep">';
+  h+='<table><tr><td><b>NIT/CI Comprador:</b></td><td><b>'+s.nit+'</b></td></tr></table><hr class="rsep">';
+  h+='<table><thead><tr><td><b>Producto</b></td><td style="text-align:center"><b>Cant</b></td><td style="text-align:right"><b>P.U.</b></td><td style="text-align:right"><b>Total</b></td></tr></thead><tbody>';
+  s.items.forEach(function(it){h+='<tr><td>'+it.nom+'</td><td style="text-align:center">'+it.qty+'</td><td style="text-align:right">$'+it.precio.toFixed(2)+'</td><td style="text-align:right">$'+it.total.toFixed(2)+'</td></tr>'});
+  h+='</tbody></table><hr class="rsep"><table><tr><td>Subtotal</td><td>$'+s.sub.toFixed(2)+'</td></tr>';
+  if(s.dp>0)h+='<tr><td>Descuento ('+s.dp+'%)</td><td style="color:#ef4444">-$'+s.da.toFixed(2)+'</td></tr>';
+  h+='<tr><td>IVA (13%)</td><td>$'+s.iva.toFixed(2)+'</td></tr><tr class="recibo-grand"><td>TOTAL</td><td>$'+s.tot.toFixed(2)+'</td></tr></table><hr class="rsep"><table><tr><td>Pago</td><td><b>'+pl+'</b></td></tr>';
+  if(s.metodo==='efectivo'){h+='<tr><td>Recibido</td><td>$'+s.rec.toFixed(2)+'</td></tr></table><div class="rvuelto"><span>VUELTO</span><span>$'+s.vuelto.toFixed(2)+'</span></div>';}
+  else h+='</table>';
+  h+='<div class="rfooter">¡Gracias por su compra! · '+empresa.nombre+'</div>';
+  document.getElementById('recibo-content').innerHTML=h;
+  openModal('m-recibo');
+}
+function actualizarReciboNIT(){if(lastSale)buildRecibo();}
+function showFacturaPOS(){
+  if(!lastSale)return;
+  var s=lastSale,pl=s.metodo==='efectivo'?'Efectivo':s.metodo==='qr'?'QR / Transferencia':'Tarjeta';
+  document.getElementById('recibo-title').innerHTML='<i class="ti ti-file-invoice" style="margin-right:6px"></i>Factura '+s.num;
+  var h='<div style="border:2px solid #1a1f2e;border-radius:6px;padding:14px;margin-bottom:10px;font-size:12px">';
+  h+='<div style="display:flex;justify-content:space-between;margin-bottom:10px"><div><b style="font-size:14px">'+empresa.nombre+'</b><br><span style="color:#666">NIT: '+empresa.nit+' · '+empresa.dir+'</span><br><span style="color:#666">Tel: '+empresa.tel+'</span></div><div style="text-align:right"><span style="background:#1a1f2e;color:#fff;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:700">FACTURA</span><br><span style="color:#666">'+s.num+'</span></div></div>';
+  h+='<div style="background:#f8fafc;padding:8px;border-radius:4px;display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11px;margin-bottom:10px"><div><b>Fecha:</b> '+s.fecha+'</div><div><b>Hora:</b> '+s.hora+'</div><div><b>Cliente:</b> Consumidor Final</div><div><b>NIT/CI Comprador:</b> <strong>'+s.nit+'</strong></div></div>';
+  h+='<table style="width:100%;border-collapse:collapse;font-size:11px"><thead style="background:#1a1f2e;color:#fff"><tr><td style="padding:5px 6px">Descripción</td><td style="padding:5px 6px;text-align:center">Cant</td><td style="padding:5px 6px;text-align:right">P.U.</td><td style="padding:5px 6px;text-align:right">Importe</td></tr></thead><tbody>';
+  s.items.forEach(function(it,idx){h+='<tr style="background:'+(idx%2?'#f8fafc':'#fff')+'"><td style="padding:5px 6px">'+it.nom+'</td><td style="padding:5px 6px;text-align:center">'+it.qty+'</td><td style="padding:5px 6px;text-align:right">$'+it.precio.toFixed(2)+'</td><td style="padding:5px 6px;text-align:right">$'+it.total.toFixed(2)+'</td></tr>'});
+  h+='</tbody></table><table style="width:100%;font-size:12px;border-top:2px solid #1a1f2e;margin-top:4px"><tr><td style="padding:3px 6px">Subtotal</td><td style="text-align:right;padding:3px 6px">$'+s.sub.toFixed(2)+'</td></tr>';
+  if(s.dp>0)h+='<tr><td style="color:#ef4444;padding:3px 6px">Descuento ('+s.dp+'%)</td><td style="text-align:right;color:#ef4444;padding:3px 6px">-$'+s.da.toFixed(2)+'</td></tr>';
+  h+='<tr><td style="padding:3px 6px">IVA (13%)</td><td style="text-align:right;padding:3px 6px">$'+s.iva.toFixed(2)+'</td></tr>';
+  h+='<tr style="background:#1a1f2e;color:#fff"><td style="padding:6px;font-size:13px;font-weight:700">TOTAL</td><td style="text-align:right;padding:6px;font-size:13px;font-weight:700">$'+s.tot.toFixed(2)+'</td></tr>';
+  if(s.metodo==='efectivo')h+='<tr><td style="color:#10b981;font-weight:600;padding:3px 6px">Vuelto</td><td style="color:#10b981;font-weight:600;text-align:right;padding:3px 6px">$'+s.vuelto.toFixed(2)+'</td></tr>';
+  h+='<tr><td colspan="2" style="color:#666;font-size:11px;padding:3px 6px">Pago: <b>'+pl+'</b></td></tr></table>';
+  h+='<div style="text-align:center;font-size:10px;color:#999;margin-top:8px;border-top:1px dashed #ccc;padding-top:6px">Documento legal · '+empresa.nombre+' · Conserve este comprobante</div></div>';
+  document.getElementById('recibo-content').innerHTML=h;
+}
 
-/* ===== CSV ===== */
-function exportTable(tbodyId,nombre){var tb=document.getElementById(tbodyId);if(!tb)return;var rows=tb.querySelectorAll('tr'),csv='';rows.forEach(function(r){var cells=r.querySelectorAll('td'),line=[];cells.forEach(function(c){line.push('"'+c.textContent.trim().replace(/"/g,'""')+'"')});if(line.length)csv+=line.join(',')+'\n';});var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download=nombre+'_'+new Date().toISOString().slice(0,10)+'.csv';a.click();flash('CSV exportado: '+nombre,'ok');}
+/* ===========================
+   EXPORT CSV
+=========================== */
+function exportTable(tbodyId,nombre){
+  var tb=document.getElementById(tbodyId);if(!tb)return;
+  var rows=tb.querySelectorAll('tr'),csv='';
+  rows.forEach(function(r){var cells=r.querySelectorAll('td'),line=[];cells.forEach(function(c){line.push('"'+c.textContent.trim().replace(/"/g,'""')+'"')});if(line.length)csv+=line.join(',')+'\n';});
+  var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download=nombre+'_'+new Date().toISOString().slice(0,10)+'.csv';a.click();flash('CSV exportado: '+nombre,'ok');
+}
 
 syncPOSData();
 
-/* ===== CHARTS ===== */
+/* ===========================
+   CHARTS
+=========================== */
 (function(){
   var sc=document.getElementById('salesChart');
-  if(sc)new Chart(sc,{type:'bar',data:{labels:['Nov','Dic','Ene','Feb','Mar','Abr','May'],datasets:[{label:'Ventas',data:[198000,231000,214000,248000,265000,272000,284390],backgroundColor:'rgba(59,91,219,.18)',borderColor:'#3b5bdb',borderWidth:2,borderRadius:6},{label:'Meta',data:[210000,225000,220000,240000,260000,270000,290000],type:'line',borderColor:'#10b981',borderWidth:2,pointRadius:3,tension:.4,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'$'+(v/1000).toFixed(0)+'k'},color:'#6b7280'},grid:{color:'rgba(0,0,0,.05)'},x:{grid:{display:false}}},x:{ticks:{color:'#6b7280'},grid:{display:false}}}}});
+  if(sc)new Chart(sc,{type:'bar',data:{labels:['Nov','Dic','Ene','Feb','Mar','Abr','May'],datasets:[{label:'Ventas',data:[198000,231000,214000,248000,265000,272000,284390],backgroundColor:'rgba(59,91,219,.18)',borderColor:'#3b5bdb',borderWidth:2,borderRadius:6},{label:'Meta',data:[210000,225000,220000,240000,260000,270000,290000],type:'line',borderColor:'#10b981',borderWidth:2,pointRadius:3,tension:.4,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'$'+(v/1000).toFixed(0)+'k'},color:'#6b7280'},grid:{color:'rgba(0,0,0,.05)'}},x:{ticks:{color:'#6b7280'},grid:{display:false}}}}});
   var cc=document.getElementById('catChart');
   if(cc)new Chart(cc,{type:'doughnut',data:{labels:['Laptops','Monitores','Periféricos','Audio','Redes'],datasets:[{data:[42,21,18,11,8],backgroundColor:['#3b5bdb','#10b981','#f59e0b','#8b5cf6','#14b8a6'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'70%',plugins:{legend:{display:false}}}});
 })();
